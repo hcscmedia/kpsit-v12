@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- ═══ SEO META ═══════════════════════════════════════════ -->
+  <title>Einsatznachweis – Tätigkeitsnachweis | KPS-IT.de</title>
+  <meta name="description" content="Digitaler Einsatznachweis und Tätigkeitsnachweis für Service-Tester und Marktforscher. Einsätze dokumentieren und nachweisen." />
+  <meta name="keywords" content="Einsatznachweis Service-Tester, Tätigkeitsnachweis Marktforscher, digitaler Nachweis Erhebung" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="KPS-IT.de – Service-Tester & Marktforscher" />
+  <link rel="canonical" href="https://www.kps-it.de/einsatznachweis.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.kps-it.de/einsatznachweis.html" />
+  <meta property="og:title" content="Einsatznachweis – Tätigkeitsnachweis | KPS-IT.de" />
+  <meta property="og:description" content="Digitaler Einsatznachweis und Tätigkeitsnachweis für Service-Tester und Marktforscher. Einsätze dokumentieren und nachweisen." />
+  <meta property="og:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="KPS-IT.de" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Einsatznachweis – Tätigkeitsnachweis | KPS-IT.de" />
+  <meta name="twitter:description" content="Digitaler Einsatznachweis und Tätigkeitsnachweis für Service-Tester und Marktforscher. Einsätze dokumentieren und nachweisen." />
+  <meta name="twitter:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta name="twitter:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <!-- ═══════════════════════════════════════════════════════════ -->
+<link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#080c14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="subpage.css" />
+  <link rel="stylesheet" href="features.css" />
+  <link rel="stylesheet" href="features2.css" />
+  <style>
+    .en-layout { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+    @media(max-width:900px){.en-layout{grid-template-columns:1fr;}}
+    .en-card { background:var(--glass-bg,rgba(255,255,255,0.04)); border:1px solid var(--glass-border,rgba(255,255,255,0.08)); border-radius:1rem; padding:2rem; }
+    .en-card h2 { font-size:1.1rem; font-weight:700; color:var(--text-primary,#f1f5f9); margin-bottom:1.5rem; display:flex; align-items:center; gap:.5rem; }
+    .en-preview-card { position:sticky; top:90px; }
+    .en-fg { margin-bottom:.9rem; }
+    .en-fg label { display:block; font-size:.75rem; font-weight:600; color:var(--text-muted,#94a3b8); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.35rem; }
+    .en-fg input,.en-fg select,.en-fg textarea { width:100%; padding:.6rem .85rem; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:.5rem; color:var(--text-primary,#f1f5f9); font-size:.875rem; font-family:inherit; box-sizing:border-box; transition:border-color .2s; }
+    .en-fg input:focus,.en-fg select:focus,.en-fg textarea:focus { outline:none; border-color:#6366f1; }
+    .en-fg select option { background:#1e293b; }
+    .en-fg textarea { resize:vertical; min-height:70px; }
+    .en-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:500px){.en-row{grid-template-columns:1fr;}}
+    .en-btns { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1.25rem; }
+    .en-btn { display:inline-flex; align-items:center; gap:.4rem; padding:.6rem 1.1rem; border-radius:.5rem; font-size:.825rem; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all .2s; }
+    .en-btn-primary { background:#6366f1; color:#fff; }
+    .en-btn-primary:hover { background:#4f46e5; transform:translateY(-1px); }
+    .en-btn-ghost { background:rgba(255,255,255,0.07); color:var(--text-primary,#f1f5f9); border:1px solid rgba(255,255,255,0.1); }
+    .en-btn-ghost:hover { background:rgba(255,255,255,0.12); }
+    .en-btn-green { background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.2); }
+    .en-btn-green:hover { background:rgba(16,185,129,0.25); }
+    .en-btn-red { background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.2); }
+    .en-btn-red:hover { background:rgba(239,68,68,0.22); }
+    .en-save-ok { display:none; margin-top:1rem; padding:.7rem 1rem; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); border-radius:.5rem; color:#34d399; font-size:.85rem; }
+    /* Dokument */
+    .en-doc { background:#fff; color:#1a1a2e; border-radius:.75rem; padding:1.5rem; font-family:'Inter',Arial,sans-serif; font-size:.78rem; }
+    .en-doc-top { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #1e3a5f; padding-bottom:.75rem; margin-bottom:.75rem; }
+    .en-doc-brand { font-size:.95rem; font-weight:800; color:#1e3a5f; }
+    .en-doc-brand span { color:#6366f1; }
+    .en-doc-brand small { display:block; font-size:.6rem; font-weight:400; color:#64748b; }
+    .en-doc-stamp { background:#1e3a5f; color:#fff; font-size:.6rem; font-weight:700; padding:.2rem .55rem; border-radius:.2rem; text-transform:uppercase; letter-spacing:.05em; }
+    .en-doc-h { font-size:.95rem; font-weight:700; color:#1e3a5f; text-align:center; margin-bottom:.75rem; }
+    .en-doc-grid { display:grid; grid-template-columns:1fr 1fr; gap:.35rem .9rem; margin-bottom:.75rem; }
+    .en-doc-f label { font-size:.58rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.05em; display:block; }
+    .en-doc-f span { font-size:.72rem; color:#1a1a2e; font-weight:600; }
+    .en-doc-hr { border:none; border-top:1px solid #e2e8f0; margin:.65rem 0; }
+    .en-doc-notice { background:#f0f9ff; border-left:3px solid #1e3a5f; padding:.45rem .7rem; font-size:.67rem; color:#334155; border-radius:0 .25rem .25rem 0; margin-bottom:.65rem; }
+    .en-doc-sigs { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.65rem; }
+    .en-doc-sig { border-top:1px solid #cbd5e1; padding-top:.35rem; font-size:.62rem; color:#64748b; }
+    .en-doc-id { text-align:right; font-size:.58rem; color:#94a3b8; margin-top:.4rem; }
+    /* Liste */
+    .en-list-sec { margin-top:3rem; }
+    .en-list-sec h2 { font-size:1.1rem; font-weight:700; color:var(--text-primary,#f1f5f9); margin-bottom:1.25rem; display:flex; align-items:center; gap:.5rem; }
+    .en-badge { background:rgba(99,102,241,0.2); color:#818cf8; font-size:.72rem; padding:.15rem .55rem; border-radius:999px; font-weight:600; }
+    .en-empty { text-align:center; padding:3rem 1rem; color:var(--text-muted,#94a3b8); background:var(--glass-bg,rgba(255,255,255,0.04)); border:1px dashed rgba(255,255,255,0.1); border-radius:1rem; font-size:.875rem; }
+    .en-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1rem; }
+    .en-item { background:var(--glass-bg,rgba(255,255,255,0.04)); border:1px solid var(--glass-border,rgba(255,255,255,0.08)); border-radius:.75rem; padding:1.15rem; transition:border-color .2s,transform .2s; }
+    .en-item:hover { border-color:rgba(99,102,241,0.4); transform:translateY(-2px); }
+    .en-item-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.6rem; }
+    .en-item-title { font-size:.875rem; font-weight:700; color:var(--text-primary,#f1f5f9); }
+    .en-item-date { font-size:.72rem; color:var(--text-muted,#94a3b8); }
+    .en-item-type { display:inline-block; font-size:.68rem; font-weight:600; padding:.18rem .55rem; border-radius:999px; background:rgba(99,102,241,0.15); color:#818cf8; margin-bottom:.45rem; }
+    .en-item-meta { font-size:.78rem; color:var(--text-muted,#94a3b8); margin-bottom:.65rem; line-height:1.6; }
+    .en-item-btns { display:flex; gap:.45rem; flex-wrap:wrap; }
+    .en-item-btns .en-btn { font-size:.72rem; padding:.3rem .65rem; }
+    @media print {
+      body *{visibility:hidden!important;}
+      .en-doc,.en-doc *{visibility:visible!important;}
+      .en-doc{position:fixed!important;top:0;left:0;width:100%!important;padding:2cm!important;font-size:10pt!important;border-radius:0!important;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="KPS-IT.de – Startseite">
+        <svg class="logo-svg" viewBox="0 0 220 52" width="180" height="44" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KPS-IT.de Logo">
+          <!-- Icon: Kreis mit Pfeil und Haken -->
+          <g transform="translate(4,4)">
+            <!-- Äußerer Kreis (Teal) -->
+            <circle cx="22" cy="22" r="20" fill="none" stroke="#1a7a6e" stroke-width="2.5" opacity="0.6"/>
+            <!-- Mittlerer Bogen -->
+            <path d="M 8 22 A 14 14 0 0 1 36 22" fill="none" stroke="#1a7a6e" stroke-width="2" stroke-linecap="round"/>
+            <!-- Haken (Grün) -->
+            <path d="M 10 24 L 17 31 L 30 14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Pfeil nach oben rechts (Grün) -->
+            <path d="M 26 10 L 36 4 M 36 4 L 30 4 M 36 4 L 36 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <!-- Text: KPS-IT -->
+          <text x="54" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="1" class="logo-text-main">KPS-IT</text>
+          <!-- Punkt nach IT -->
+          <circle cx="142" cy="20" r="3" class="logo-dot"/>
+          <!-- .de klein -->
+          <text x="148" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="13" class="logo-text-de">.de</text>
+          <!-- Untertitel -->
+          <text x="54" y="40" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="9" letter-spacing="2" class="logo-text-sub">SERVICE-TESTER &amp; MARKTFORSCHER</text>
+        </svg>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="index.html#leistungen" class="nav-link" data-i18n="nav_services">Leistungen</a>
+        <a href="kalender.html" class="nav-link" data-i18n="nav_calendar">Verfügbarkeit</a>
+        <a href="tracking.html" class="nav-link" data-i18n="nav_tracking">Auftrags-Tracking</a>
+        <a href="institute.html" class="nav-link" data-i18n="nav_institutes">Institute</a>
+        <a href="index.html#kontakt" class="nav-link" data-i18n="nav_contact">Kontakt</a>
+        <button class="lang-toggle" onclick="KPS_i18n.toggle()" aria-label="Sprache wechseln" title="Switch language">
+          <span class="lang-de">DE</span><span class="lang-en">EN</span>
+        </button>
+        <button class="theme-toggle" data-theme-toggle aria-label="Farbschema wechseln" title="Dark/Light Mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </nav>
+            <div class="nav-controls">
+        <button class="theme-toggle-mobile" data-theme-toggle aria-label="Farbschema wechseln" title="Dark/Light Mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html#leistungen" class="mobile-nav-link" data-i18n="nav_services">Leistungen</a>
+      <a href="kalender.html" class="mobile-nav-link" data-i18n="nav_calendar">Verfügbarkeit</a>
+      <a href="tracking.html" class="mobile-nav-link" data-i18n="nav_tracking">Auftrags-Tracking</a>
+      <a href="institute.html" class="mobile-nav-link" data-i18n="nav_institutes">Institute</a>
+      <a href="index.html#kontakt" class="mobile-nav-link" data-i18n="nav_contact">Kontakt</a>
+      <button class="lang-toggle" onclick="KPS_i18n.toggle()" style="margin:0.5rem 1.25rem;" aria-label="Sprache wechseln">
+        <span class="lang-de">DE</span><span class="lang-en">EN</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Startseite</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Einsatznachweis</span>
+        </nav>
+        <div class="subpage-hero-label"><span class="badge-dot"></span>Digitaler Tätigkeitsnachweis</div>
+        <h1 class="subpage-hero-title">Einsatznachweis</h1>
+        <p class="subpage-hero-desc">Erstellen, speichern und drucken Sie professionelle Tätigkeitsnachweise für Ihre Marktforschungseinsätze.</p>
+      </div>
+    </section>
+
+    <section style="padding:3rem 0 5rem;">
+      <div class="container">
+
+        <div class="en-layout">
+                  <!-- GESPEICHERTE NACHWEISE -->
+        <div class="en-list-sec">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Gespeicherte Nachweise
+            <span class="en-badge" id="en-badge"></span>
+          </h2>
+          <div id="en-list"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+          <!-- FORMULAR -->
+          <div>
+            <div class="en-card">
+              <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Nachweis erstellen
+              </h2>
+              <div class="en-row">
+                <div class="en-fg"><label>Ihr Name *</label><input type="text" id="en-name" placeholder="Max Mustermann" /></div>
+                <div class="en-fg"><label>Auftrags-Nr.</label><input type="text" id="en-auftrag" placeholder="AUF-2024-001" /></div>
+              </div>
+              <div class="en-row">
+                <div class="en-fg"><label>Einsatzdatum *</label><input type="date" id="en-datum" /></div>
+                <div class="en-fg"><label>Uhrzeit</label><input type="time" id="en-uhrzeit" /></div>
+              </div>
+              <div class="en-fg"><label>Filiale / Standort *</label><input type="text" id="en-filiale" placeholder="z. B. REWE, Musterstraße 1, Berlin" /></div>
+              <div class="en-row">
+                <div class="en-fg">
+                  <label>Erhebungstyp *</label>
+                  <select id="en-typ">
+                    <option value="">Bitte wählen…</option>
+                    <option value="Preiserhebung">Preiserhebung</option>
+                    <option value="Mystery Shopping">Mystery Shopping</option>
+                    <option value="Fotodokumentation">Fotodokumentation</option>
+                    <option value="Verfügbarkeits-Check">Verfügbarkeits-Check</option>
+                    <option value="Berichterstellung">Berichterstellung</option>
+                    <option value="Kombinierte Erhebung">Kombinierte Erhebung</option>
+                  </select>
+                </div>
+                <div class="en-fg"><label>Dauer (Min.)</label><input type="number" id="en-dauer" placeholder="45" min="1" max="480" /></div>
+              </div>
+              <div class="en-fg"><label>Auftraggeber / Institut</label><input type="text" id="en-institut" placeholder="z. B. IFH Köln, GfK SE, Smartspotter" /></div>
+              <div class="en-fg"><label>Notiz (intern)</label><textarea id="en-notiz" rows="3" placeholder="Interne Anmerkungen…"></textarea></div>
+              <div class="en-btns">
+                <button class="en-btn en-btn-primary" onclick="EN.save()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Speichern
+                </button>
+                <button class="en-btn en-btn-green" onclick="EN.print()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                  Drucken / PDF
+                </button>
+                <button class="en-btn en-btn-ghost" onclick="EN.reset()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+                  Zurücksetzen
+                </button>
+              </div>
+              <div class="en-save-ok" id="en-save-ok">✓ Nachweis erfolgreich gespeichert!</div>
+            </div>
+          </div>
+
+          <!-- VORSCHAU -->
+          <div>
+            <div class="en-card en-preview-card">
+              <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Live-Vorschau
+              </h2>
+              <div class="en-doc" id="en-doc">
+                <div class="en-doc-top">
+                  <div class="en-doc-brand">KPS<span>-Berlin</span>.de<small>Zertifizierter Service-Tester &amp; Marktforscher</small></div>
+                  <div class="en-doc-stamp">Einsatznachweis</div>
+                </div>
+                <div class="en-doc-h">TÄTIGKEITSNACHWEIS</div>
+                <div class="en-doc-grid">
+                  <div class="en-doc-f"><label>Tester</label><span id="pv-name">–</span></div>
+                  <div class="en-doc-f"><label>Auftrags-Nr.</label><span id="pv-auftrag">–</span></div>
+                  <div class="en-doc-f"><label>Datum</label><span id="pv-datum">–</span></div>
+                  <div class="en-doc-f"><label>Uhrzeit</label><span id="pv-uhrzeit">–</span></div>
+                  <div class="en-doc-f" style="grid-column:span 2"><label>Filiale / Standort</label><span id="pv-filiale">–</span></div>
+                  <div class="en-doc-f"><label>Erhebungstyp</label><span id="pv-typ">–</span></div>
+                  <div class="en-doc-f"><label>Dauer</label><span id="pv-dauer">–</span></div>
+                  <div class="en-doc-f" style="grid-column:span 2"><label>Auftraggeber</label><span id="pv-institut">–</span></div>
+                </div>
+                <hr class="en-doc-hr" />
+                <div class="en-doc-notice">Diese Erhebung dient der <strong>Marktforschung und Qualitätsverbesserung</strong>. Alle Daten werden anonymisiert und gemäß <strong>DSGVO</strong> verarbeitet. Rückfragen: <strong>kps-it.de</strong></div>
+                <div class="en-doc-sigs">
+                  <div class="en-doc-sig"><div style="height:26px;"></div>Unterschrift Tester</div>
+                  <div class="en-doc-sig"><div style="height:26px;"></div>Unterschrift Filialleiter (opt.)</div>
+                </div>
+                <div class="en-doc-id" id="pv-id">Dok-ID: –</div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </main>
+
+    <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-col footer-brand-col">
+        <a href="index.html" class="footer-logo-link" aria-label="KPS-IT.de – Startseite">
+              <svg class="logo-svg footer-logo-svg" viewBox="0 0 220 52" width="200" height="48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KPS-IT.de Logo">
+                <g transform="translate(4,4)">
+                  <circle cx="22" cy="22" r="20" fill="none" stroke="#1a7a6e" stroke-width="2.5" opacity="0.6"/>
+                  <path d="M 8 22 A 14 14 0 0 1 36 22" fill="none" stroke="#1a7a6e" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M 10 24 L 17 31 L 30 14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M 26 10 L 36 4 M 36 4 L 30 4 M 36 4 L 36 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <text x="54" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="1" class="logo-text-main">KPS-IT</text>
+                <circle cx="142" cy="20" r="3" class="logo-dot"/>
+                <text x="148" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="13" class="logo-text-de">.de</text>
+                <text x="54" y="40" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="9" letter-spacing="2" class="logo-text-sub">SERVICE-TESTER &amp; MARKTFORSCHER</text>
+              </svg>
+            </a>
+        <p class="footer-tagline">Professionelle Qualitätssicherung im Einzelhandel – zuverlässig, diskret und DSGVO-konform in Berlin &amp; Brandenburg.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">&#10003; DSGVO-konform</span>
+          <span class="footer-badge">&#10003; Zertifiziert</span>
+          <span class="footer-badge">&#10003; Berlin &amp; Brandenburg</span>
+        </div>
+      </div>
+
+      <!-- Leistungen Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Leistungen</h4>
+        <ul class="footer-links">
+          <li><a href="preiserhebungen.html">Preiserhebungen</a></li>
+          <li><a href="service-tests.html">Service-Tests</a></li>
+          <li><a href="fotodokumentation.html">Fotodokumentation</a></li>
+          <li><a href="verfuegbarkeits-checks.html">Verfügbarkeits-Checks</a></li>
+          <li><a href="berichterstellung.html">Berichterstellung</a></li>
+          <li><a href="dsgvo-compliance.html">DSGVO-Compliance</a></li>
+        </ul>
+      </div>
+
+      <!-- Services Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="institute.html">Institute &amp; Partner</a></li>
+          <li><a href="kalender.html">Verfügbarkeitskalender</a></li>
+          <li><a href="tracking.html">Auftrags-Tracking</a></li>
+          <li><a href="einsatznachweis.html">Einsatznachweis</a></li>
+          <li><a href="ueber-mich.html">Über mich</a></li>
+        </ul>
+      </div>
+
+      <!-- Kontakt Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Kontakt</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <span class="footer-contact-icon">&#9993;</span>
+            <a href="mailto:info@kps-it.de">info@kps-it.de</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#9742;</span>
+            <a href="tel:+4930000000">+49 30 000 000</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#128241;</span>
+            <a href="https://wa.me/4917649046272" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#9679;</span>
+            <a href="https://www.linkedin.com/in/kps-it" target="_blank" rel="noopener noreferrer">LinkedIn-Profil</a>
+          </li>
+        </ul>
+        <div class="footer-availability">
+          <span class="footer-avail-dot"></span>
+          <span>Verfügbar für neue Aufträge</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">&copy; <span id="year"></span> KPS-IT.de – Service-Tester &amp; Marktforscher für Berlin &amp; Brandenburg. Alle Rechte vorbehalten.</p>
+        <nav class="footer-legal-nav" aria-label="Rechtliche Links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+          <a href="sitemap.xml">Sitemap</a>
+          <a href="admin.php" class="footer-admin-link" aria-label="Admin">&#9881;</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="main.js"></script>
+  <script src="i18n.js"></script>
+  <script src="features2.js"></script>
+
+  <script>
+  (function(){
+    /* ── Einsatznachweis v10: API-basierte Speicherung ── */
+    var API = 'nachweis-api.php';
+    var cachedList = [];
+
+    function fmtDate(d){
+      if(!d) return '–';
+      var p=d.split('-');
+      return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d;
+    }
+
+    function getData(){
+      return{
+        name:document.getElementById('en-name').value.trim(),
+        auftrag:document.getElementById('en-auftrag').value.trim(),
+        datum:document.getElementById('en-datum').value,
+        uhrzeit:document.getElementById('en-uhrzeit').value,
+        filiale:document.getElementById('en-filiale').value.trim(),
+        typ:document.getElementById('en-typ').value,
+        dauer:document.getElementById('en-dauer').value,
+        institut:document.getElementById('en-institut').value.trim(),
+        notiz:document.getElementById('en-notiz').value.trim()
+      };
+    }
+
+    function updatePreview(){
+      var d=getData();
+      document.getElementById('pv-name').textContent=d.name||'–';
+      document.getElementById('pv-auftrag').textContent=d.auftrag||'–';
+      document.getElementById('pv-datum').textContent=fmtDate(d.datum);
+      document.getElementById('pv-uhrzeit').textContent=d.uhrzeit||'–';
+      document.getElementById('pv-filiale').textContent=d.filiale||'–';
+      document.getElementById('pv-typ').textContent=d.typ||'–';
+      document.getElementById('pv-dauer').textContent=d.dauer?d.dauer+' Min.':'–';
+      document.getElementById('pv-institut').textContent=d.institut||'–';
+      document.getElementById('pv-id').textContent='Dok-ID: '+(d.auftrag||fmtDate(d.datum)||new Date().toLocaleDateString('de-DE'));
+    }
+
+    function renderList(list){
+      cachedList = list || [];
+      var badge=document.getElementById('en-badge');
+      if(badge) badge.textContent=cachedList.length>0?cachedList.length:'';
+      var el=document.getElementById('en-list');
+      if(!cachedList.length){
+        el.innerHTML='<div class="en-empty">📄 Noch keine Nachweise gespeichert.<br>Füllen Sie das Formular aus und klicken Sie auf „Speichern".</div>';
+        return;
+      }
+      var h='<div class="en-grid">';
+      cachedList.forEach(function(e){
+        var sd=e.savedAt||e.created_at||'';
+        try{sd=new Date(sd).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}catch(x){}
+        h+='<div class="en-item">';
+        h+='<div class="en-item-top"><div class="en-item-title">'+(e.filiale||'Unbenannt')+'</div><div class="en-item-date">'+sd+'</div></div>';
+        h+='<div class="en-item-type">'+(e.typ||'Erhebung')+'</div>';
+        h+='<div class="en-item-meta">'+(e.datum?'📅 '+fmtDate(e.datum)+'&nbsp; ':'')+(e.name?'👤 '+e.name+'&nbsp; ':'')+(e.institut?'🏢 '+e.institut:'')+'</div>';
+        h+='<div class="en-item-btns">';
+        h+='<button class="en-btn en-btn-ghost" onclick="EN.load(\''+e.id+'\')" >Laden</button>';
+        h+='<button class="en-btn en-btn-green" onclick="EN.loadPrint(\''+e.id+'\')" >Drucken</button>';
+        h+='</div></div>';
+      });
+      h+='</div>';
+      el.innerHTML=h;
+    }
+
+    function loadList(){
+      fetch(API+'?action=list')
+        .then(function(r){return r.json();})
+        .then(function(data){
+          if(data.success) renderList(data.nachweise||[]);
+          else renderList([]);
+        })
+        .catch(function(){
+          // Fallback: localStorage
+          try{
+            var ls=JSON.parse(localStorage.getItem('kps_einsatznachweise')||'[]');
+            renderList(ls);
+          }catch(e){renderList([]);}
+        });
+    }
+
+    window.EN={
+      save:function(){
+        var d=getData();
+        if(!d.name||!d.datum||!d.filiale||!d.typ){alert('Bitte Name, Datum, Filiale und Typ ausfüllen.');return;}
+        updatePreview();
+        var fd=new FormData();
+        fd.append('action','save');
+        Object.keys(d).forEach(function(k){fd.append(k,d[k]);});
+        fetch(API,{method:'POST',body:fd})
+          .then(function(r){return r.json();})
+          .then(function(res){
+            if(res.success){
+              var ok=document.getElementById('en-save-ok');
+              ok.style.display='block';
+              setTimeout(function(){ok.style.display='none';},3000);
+              loadList();
+            } else {
+              alert('Fehler: '+(res.message||'Unbekannter Fehler'));
+            }
+          })
+          .catch(function(){
+            // Fallback: localStorage
+            var list=[];
+            try{list=JSON.parse(localStorage.getItem('kps_einsatznachweise')||'[]');}catch(e){}
+            d.id='EN-'+Date.now(); d.savedAt=new Date().toISOString();
+            list.unshift(d);
+            localStorage.setItem('kps_einsatznachweise',JSON.stringify(list));
+            renderList(list);
+            var ok=document.getElementById('en-save-ok');
+            ok.style.display='block';
+            setTimeout(function(){ok.style.display='none';},3000);
+          });
+      },
+      load:function(id){
+        var e=cachedList.find(function(x){return x.id===id;});
+        if(!e) return;
+        document.getElementById('en-name').value=e.name||'';
+        document.getElementById('en-auftrag').value=e.auftrag||'';
+        document.getElementById('en-datum').value=e.datum||'';
+        document.getElementById('en-uhrzeit').value=e.uhrzeit||'';
+        document.getElementById('en-filiale').value=e.filiale||'';
+        document.getElementById('en-typ').value=e.typ||'';
+        document.getElementById('en-dauer').value=e.dauer||'';
+        document.getElementById('en-institut').value=e.institut||'';
+        document.getElementById('en-notiz').value=e.notiz||'';
+        updatePreview();
+        window.scrollTo({top:0,behavior:'smooth'});
+      },
+      print:function(){updatePreview();window.print();},
+      loadPrint:function(id){EN.load(id);setTimeout(function(){window.print();},300);},
+      reset:function(){
+        ['en-name','en-auftrag','en-uhrzeit','en-filiale','en-institut','en-notiz'].forEach(function(fid){document.getElementById(fid).value='';});
+        document.getElementById('en-typ').value='';
+        document.getElementById('en-dauer').value='';
+        var today=new Date().toISOString().split('T')[0];
+        document.getElementById('en-datum').value=today;
+        updatePreview();
+      }
+    };
+
+    // Init
+    document.addEventListener('DOMContentLoaded',function(){
+      var today=new Date().toISOString().split('T')[0];
+      document.getElementById('en-datum').value=today;
+      var now=new Date();
+      document.getElementById('en-uhrzeit').value=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+      document.querySelectorAll('#en-name,#en-auftrag,#en-datum,#en-uhrzeit,#en-filiale,#en-typ,#en-dauer,#en-institut').forEach(function(el){
+        el.addEventListener('input',updatePreview);
+        el.addEventListener('change',updatePreview);
+      });
+      updatePreview();
+      loadList();
+    });
+  })();
+  </script>
+</body>
+</html>

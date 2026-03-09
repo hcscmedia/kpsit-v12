@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- ═══ SEO META ═══════════════════════════════════════════ -->
+  <title>Offline | KPS-IT.de</title>
+  <meta name="description" content="Sie sind offline. Bitte stellen Sie eine Internetverbindung her." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="KPS-IT.de – Service-Tester & Marktforscher" />
+  <link rel="canonical" href="https://www.kps-it.de/offline.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.kps-it.de/offline.html" />
+  <meta property="og:title" content="Offline | KPS-IT.de" />
+  <meta property="og:description" content="Sie sind offline. Bitte stellen Sie eine Internetverbindung her." />
+  <meta property="og:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="KPS-IT.de" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Offline | KPS-IT.de" />
+  <meta name="twitter:description" content="Sie sind offline. Bitte stellen Sie eine Internetverbindung her." />
+  <meta name="twitter:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta name="twitter:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <!-- ═══════════════════════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14;
+      --bg-surface: #0d1220;
+      --border: rgba(99,102,241,0.15);
+      --accent: #6366f1;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .offline-icon {
+      width: 5rem;
+      height: 5rem;
+      background: rgba(99,102,241,0.1);
+      border: 2px solid rgba(99,102,241,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .offline-icon svg { color: var(--accent); }
+    .offline-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+    }
+    .offline-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 380px;
+      margin: 0 auto 2rem;
+    }
+    .offline-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: left;
+    }
+    .offline-card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .offline-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .offline-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(99,102,241,0.08);
+      transition: color 0.2s;
+    }
+    .offline-link:last-child { border-bottom: none; }
+    .offline-link:hover { color: var(--text-primary); }
+    .offline-link-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .offline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .offline-btn:hover { background: #4f46e5; }
+    .offline-brand {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .offline-brand strong { color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="offline-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+      <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+      <line x1="12" y1="20" x2="12.01" y2="20"/>
+    </svg>
+  </div>
+
+  <h1 class="offline-title">Keine Internetverbindung</h1>
+  <p class="offline-desc">
+    Sie sind gerade offline. Die wichtigsten Seiten wurden auf Ihrem Gerät gespeichert
+    und sind weiterhin verfügbar.
+  </p>
+
+  <div class="offline-card">
+    <div class="offline-card-title">Offline verfügbare Seiten</div>
+    <div class="offline-links">
+      <a href="index.html" class="offline-link"><span class="offline-link-dot"></span>Startseite</a>
+      <a href="einsatznachweis.html" class="offline-link"><span class="offline-link-dot"></span>Einsatznachweis</a>
+      <a href="institute.html" class="offline-link"><span class="offline-link-dot"></span>Kooperierende Institute</a>
+      <a href="preiserhebungen.html" class="offline-link"><span class="offline-link-dot"></span>Preiserhebungen</a>
+      <a href="service-tests.html" class="offline-link"><span class="offline-link-dot"></span>Service-Tests</a>
+      <a href="fotodokumentation.html" class="offline-link"><span class="offline-link-dot"></span>Fotodokumentation</a>
+      <a href="dsgvo-compliance.html" class="offline-link"><span class="offline-link-dot"></span>DSGVO-Compliance</a>
+    </div>
+  </div>
+
+  <button class="offline-btn" onclick="window.location.reload()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+    Erneut versuchen
+  </button>
+
+  <div class="offline-brand">
+    <strong>KPS-IT.de</strong> &nbsp;·&nbsp; Zertifizierter Service-Tester &amp; Marktforscher
+  </div>
+</body>
+</html>

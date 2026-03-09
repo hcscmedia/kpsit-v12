@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- ═══ SEO META ═══════════════════════════════════════════ -->
+  <title>Auftrags-Tracking – Status Ihrer Erhebung | KPS-IT.de</title>
+  <meta name="description" content="Auftrags-Tracking-Portal für Auftraggeber. Status laufender Erhebungen und Einsätze in Echtzeit verfolgen – sicher und verschlüsselt." />
+  <meta name="keywords" content="Auftrags-Tracking Marktforschung, Erhebungsstatus, Auftrag verfolgen KPS-IT" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="KPS-IT.de – Service-Tester & Marktforscher" />
+  <link rel="canonical" href="https://www.kps-it.de/tracking.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.kps-it.de/tracking.html" />
+  <meta property="og:title" content="Auftrags-Tracking – Status Ihrer Erhebung | KPS-IT.de" />
+  <meta property="og:description" content="Auftrags-Tracking-Portal für Auftraggeber. Status laufender Erhebungen und Einsätze in Echtzeit verfolgen – sicher und verschlüsselt." />
+  <meta property="og:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="KPS-IT.de" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Auftrags-Tracking – Status Ihrer Erhebung | KPS-IT.de" />
+  <meta name="twitter:description" content="Auftrags-Tracking-Portal für Auftraggeber. Status laufender Erhebungen und Einsätze in Echtzeit verfolgen – sicher und verschlüsselt." />
+  <meta name="twitter:image" content="https://www.kps-it.de/icons/og-image.png" />
+  <meta name="twitter:image:alt" content="KPS-IT.de – Professionelle Marktforschung Berlin Brandenburg" />
+  <!-- ═══════════════════════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="subpage.css" />
+  <link rel="stylesheet" href="features.css" />
+  <link rel="stylesheet" href="features2.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6366f1" />
+</head>
+<body>
+  <div class="preloader" id="preloader"><div class="preloader-inner"><div class="preloader-ring"></div><span class="preloader-text">KPS</span></div></div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="KPS-IT.de – Startseite">
+        <svg class="logo-svg" viewBox="0 0 220 52" width="180" height="44" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KPS-IT.de Logo">
+          <!-- Icon: Kreis mit Pfeil und Haken -->
+          <g transform="translate(4,4)">
+            <!-- Äußerer Kreis (Teal) -->
+            <circle cx="22" cy="22" r="20" fill="none" stroke="#1a7a6e" stroke-width="2.5" opacity="0.6"/>
+            <!-- Mittlerer Bogen -->
+            <path d="M 8 22 A 14 14 0 0 1 36 22" fill="none" stroke="#1a7a6e" stroke-width="2" stroke-linecap="round"/>
+            <!-- Haken (Grün) -->
+            <path d="M 10 24 L 17 31 L 30 14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Pfeil nach oben rechts (Grün) -->
+            <path d="M 26 10 L 36 4 M 36 4 L 30 4 M 36 4 L 36 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <!-- Text: KPS-IT -->
+          <text x="54" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="1" class="logo-text-main">KPS-IT</text>
+          <!-- Punkt nach IT -->
+          <circle cx="142" cy="20" r="3" class="logo-dot"/>
+          <!-- .de klein -->
+          <text x="148" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="13" class="logo-text-de">.de</text>
+          <!-- Untertitel -->
+          <text x="54" y="40" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="9" letter-spacing="2" class="logo-text-sub">SERVICE-TESTER &amp; MARKTFORSCHER</text>
+        </svg>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="index.html#leistungen" class="nav-link" data-i18n="nav_services">Leistungen</a>
+        <a href="kalender.html" class="nav-link" data-i18n="nav_calendar">Verfügbarkeit</a>
+        <a href="tracking.html" class="nav-link" data-i18n="nav_tracking">Auftrags-Tracking</a>
+        <a href="institute.html" class="nav-link" data-i18n="nav_institutes">Institute</a>
+        <a href="index.html#kontakt" class="nav-link" data-i18n="nav_contact">Kontakt</a>
+        <button class="lang-toggle" onclick="KPS_i18n.toggle()" aria-label="Sprache wechseln" title="Switch language">
+          <span class="lang-de">DE</span><span class="lang-en">EN</span>
+        </button>
+        <button class="theme-toggle" data-theme-toggle aria-label="Farbschema wechseln" title="Dark/Light Mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </nav>
+            <div class="nav-controls">
+        <button class="theme-toggle-mobile" data-theme-toggle aria-label="Farbschema wechseln" title="Dark/Light Mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html#leistungen" class="mobile-nav-link" data-i18n="nav_services">Leistungen</a>
+      <a href="kalender.html" class="mobile-nav-link" data-i18n="nav_calendar">Verfügbarkeit</a>
+      <a href="tracking.html" class="mobile-nav-link" data-i18n="nav_tracking">Auftrags-Tracking</a>
+      <a href="institute.html" class="mobile-nav-link" data-i18n="nav_institutes">Institute</a>
+      <a href="index.html#kontakt" class="mobile-nav-link" data-i18n="nav_contact">Kontakt</a>
+      <button class="lang-toggle" onclick="KPS_i18n.toggle()" style="margin:0.5rem 1.25rem;" aria-label="Sprache wechseln">
+        <span class="lang-de">DE</span><span class="lang-en">EN</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SUBPAGE HERO -->
+  <section class="subpage-hero">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="container subpage-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">KPS-IT.de</a>
+        <span aria-hidden="true">›</span>
+        <span data-i18n="nav_tracking">Auftrags-Tracking</span>
+      </nav>
+      <div class="subpage-hero-label" data-i18n="nav_tracking">Auftrags-Tracking</div>
+      <h1 class="subpage-hero-title" data-i18n="track_title">Auftrags-Tracking</h1>
+      <p class="subpage-hero-sub" data-i18n="track_sub">Verfolgen Sie den Status Ihres laufenden Auftrags in Echtzeit.</p>
+    </div>
+  </section>
+
+  <!-- TRACKING SEKTION -->
+  <section class="tracking-section">
+    <div class="container">
+      <div class="tracking-wrapper">
+
+        <!-- Login-Karte -->
+        <div class="tracking-login-card" id="tracking-login">
+          <div class="tracking-login-title" data-i18n="track_title">Auftrags-Tracking</div>
+          <div class="tracking-form-grid">
+            <div>
+              <label class="tracking-label" for="track-id" data-i18n="track_id_label">Auftrags-ID</label>
+              <input class="tracking-input" id="track-id" type="text" data-i18n-ph="track_id_ph" placeholder="z. B. AUF-2024-0042" autocomplete="off" />
+            </div>
+            <div>
+              <label class="tracking-label" for="track-code" data-i18n="track_pw_label">Zugangs-Code</label>
+              <input class="tracking-input" id="track-code" type="password" data-i18n-ph="track_pw_ph" placeholder="••••••••" autocomplete="off" />
+            </div>
+          </div>
+          <button class="tracking-btn" id="tracking-submit-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span data-i18n="track_btn">Auftrag abrufen</span>
+          </button>
+          <div class="tracking-error" id="tracking-error" data-i18n="track_not_found">Auftrag nicht gefunden.</div>
+        </div>
+
+        <!-- Demo-Hinweis -->
+        <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.15);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:0.8rem;color:#94a3b8;line-height:1.65;" id="demo-hint">
+          <strong style="color:#818cf8;">Demo:</strong>
+          Geben Sie <code style="background:rgba(99,102,241,0.1);padding:0.1rem 0.35rem;border-radius:4px;font-family:monospace;">AUF-2024-0042</code>
+          als ID und <code style="background:rgba(99,102,241,0.1);padding:0.1rem 0.35rem;border-radius:4px;font-family:monospace;">DEMO2024</code>
+          als Code ein, um eine Beispiel-Ansicht zu sehen.
+        </div>
+
+        <!-- Ergebnis -->
+        <div class="tracking-result" id="tracking-result">
+
+          <div class="tracking-result-card">
+            <!-- Header -->
+            <div class="tracking-result-header">
+              <div>
+                <div class="tracking-order-id" id="res-order-id">AUF-2024-0042</div>
+                <div class="tracking-order-title" id="res-order-type">Preiserhebung</div>
+              </div>
+              <div class="tracking-status-badge" id="res-status-badge">
+                <span class="status-dot"></span>
+                <span id="res-status-text">In Bearbeitung</span>
+              </div>
+            </div>
+
+            <!-- Stepper -->
+            <div class="tracking-stepper">
+              <div class="stepper-track">
+                <div class="stepper-progress-line" id="stepper-line" style="width:0%"></div>
+                <div class="stepper-step" id="step-1">
+                  <div class="stepper-circle">1</div>
+                  <div class="stepper-label" data-i18n="track_status_1">Auftrag erhalten</div>
+                </div>
+                <div class="stepper-step" id="step-2">
+                  <div class="stepper-circle">2</div>
+                  <div class="stepper-label" data-i18n="track_status_2">In Bearbeitung</div>
+                </div>
+                <div class="stepper-step" id="step-3">
+                  <div class="stepper-circle">3</div>
+                  <div class="stepper-label" data-i18n="track_status_3">Erhebung läuft</div>
+                </div>
+                <div class="stepper-step" id="step-4">
+                  <div class="stepper-circle">4</div>
+                  <div class="stepper-label" data-i18n="track_status_4">Bericht</div>
+                </div>
+                <div class="stepper-step" id="step-5">
+                  <div class="stepper-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div class="stepper-label" data-i18n="track_status_5">Abgeschlossen</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="tracking-details-grid">
+              <div class="tracking-detail-cell">
+                <div class="tracking-detail-label" data-i18n="track_client">Auftraggeber</div>
+                <div class="tracking-detail-value" id="res-client">—</div>
+              </div>
+              <div class="tracking-detail-cell">
+                <div class="tracking-detail-label" data-i18n="track_type">Erhebungstyp</div>
+                <div class="tracking-detail-value" id="res-type">—</div>
+              </div>
+              <div class="tracking-detail-cell">
+                <div class="tracking-detail-label" data-i18n="track_location">Einsatzort</div>
+                <div class="tracking-detail-value" id="res-location">—</div>
+              </div>
+              <div class="tracking-detail-cell">
+                <div class="tracking-detail-label" data-i18n="track_date">Einsatzdatum</div>
+                <div class="tracking-detail-value" id="res-date">—</div>
+              </div>
+              <div class="tracking-detail-cell" style="grid-column:1/-1;">
+                <div class="tracking-detail-label" data-i18n="track_progress">Fortschritt</div>
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.4rem;">
+                  <div style="flex:1;height:6px;background:rgba(99,102,241,0.1);border-radius:100px;overflow:hidden;">
+                    <div id="res-progress-bar" style="height:100%;background:var(--accent,#6366f1);border-radius:100px;transition:width 0.8s ease;width:0%;"></div>
+                  </div>
+                  <span id="res-progress-text" style="font-size:0.8rem;font-weight:700;color:#f1f5f9;min-width:2.5rem;text-align:right;">0%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notizen (falls vorhanden) -->
+            <div id="res-notes-row" style="padding:0 1.5rem 1.25rem;display:none;">
+              <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.12);border-radius:8px;padding:0.85rem 1rem;">
+                <div style="font-size:0.65rem;font-weight:700;color:#6366f1;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Hinweis</div>
+                <div id="res-notes" style="font-size:0.82rem;color:#94a3b8;line-height:1.65;"></div>
+              </div>
+            </div>
+
+            <!-- Zeitstempel -->
+            <div style="padding:0.85rem 1.5rem;border-top:1px solid rgba(99,102,241,0.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+              <div style="font-size:0.7rem;color:#64748b;font-family:monospace;">
+                Erstellt: <span id="res-created">—</span>
+              </div>
+              <div style="font-size:0.7rem;color:#64748b;font-family:monospace;">
+                Aktualisiert: <span id="res-updated">—</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="tracking-back-btn" id="tracking-back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span data-i18n="back">← Zurück</span>
+          </button>
+
+        </div><!-- /tracking-result -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+     <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-col footer-brand-col">
+        <a href="index.html" class="footer-logo-link" aria-label="KPS-IT.de – Startseite">
+              <svg class="logo-svg footer-logo-svg" viewBox="0 0 220 52" width="200" height="48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KPS-IT.de Logo">
+                <g transform="translate(4,4)">
+                  <circle cx="22" cy="22" r="20" fill="none" stroke="#1a7a6e" stroke-width="2.5" opacity="0.6"/>
+                  <path d="M 8 22 A 14 14 0 0 1 36 22" fill="none" stroke="#1a7a6e" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M 10 24 L 17 31 L 30 14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M 26 10 L 36 4 M 36 4 L 30 4 M 36 4 L 36 10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <text x="54" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="1" class="logo-text-main">KPS-IT</text>
+                <circle cx="142" cy="20" r="3" class="logo-dot"/>
+                <text x="148" y="24" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="13" class="logo-text-de">.de</text>
+                <text x="54" y="40" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="9" letter-spacing="2" class="logo-text-sub">SERVICE-TESTER &amp; MARKTFORSCHER</text>
+              </svg>
+            </a>
+        <p class="footer-tagline">Professionelle Qualitätssicherung im Einzelhandel – zuverlässig, diskret und DSGVO-konform in Berlin &amp; Brandenburg.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">&#10003; DSGVO-konform</span>
+          <span class="footer-badge">&#10003; Zertifiziert</span>
+          <span class="footer-badge">&#10003; Berlin &amp; Brandenburg</span>
+        </div>
+      </div>
+
+      <!-- Leistungen Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Leistungen</h4>
+        <ul class="footer-links">
+          <li><a href="preiserhebungen.html">Preiserhebungen</a></li>
+          <li><a href="service-tests.html">Service-Tests</a></li>
+          <li><a href="fotodokumentation.html">Fotodokumentation</a></li>
+          <li><a href="verfuegbarkeits-checks.html">Verfügbarkeits-Checks</a></li>
+          <li><a href="berichterstellung.html">Berichterstellung</a></li>
+          <li><a href="dsgvo-compliance.html">DSGVO-Compliance</a></li>
+        </ul>
+      </div>
+
+      <!-- Services Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="institute.html">Institute &amp; Partner</a></li>
+          <li><a href="kalender.html">Verfügbarkeitskalender</a></li>
+          <li><a href="tracking.html">Auftrags-Tracking</a></li>
+          <li><a href="einsatznachweis.html">Einsatznachweis</a></li>
+          <li><a href="ueber-mich.html">Über mich</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+
+        </ul>
+      </div>
+
+      <!-- Kontakt Column -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Kontakt</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <span class="footer-contact-icon">&#9993;</span>
+            <a href="mailto:info@kps-it.de">info@kps-it.de</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#9742;</span>
+            <a href="tel:+4917649046272">+49 17649046272</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#128241;</span>
+            <a href="https://wa.me/4917649046272" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </li>
+          <li>
+            <span class="footer-contact-icon">&#9679;</span>
+            <a href="https://www.linkedin.com/in/chkoellner" target="_blank" rel="noopener noreferrer">LinkedIn-Profil</a>
+          </li>
+        </ul>
+        <div class="footer-availability">
+          <span class="footer-avail-dot"></span>
+          <span>Verfügbar für neue Aufträge</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">&copy; <span id="year"></span> KPS-IT.de – Service-Tester &amp; Marktforscher für Berlin &amp; Brandenburg. Alle Rechte vorbehalten.</p>
+        <nav class="footer-legal-nav" aria-label="Rechtliche Links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+          <a href="sitemap.xml">Sitemap</a>
+          <a href="admin.php" class="footer-admin-link" aria-label="Admin">&#9881;</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="main.js"></script>
+  <script src="i18n.js"></script>
+  <script src="features2.js"></script>
+  <script>
+  /* ============================================================
+     DEMO-DATEN (Fallback wenn kein PHP-Server)
+     ============================================================ */
+  var DEMO_ORDER = {
+    id:          'AUF-2024-0042',
+    type:        'Preiserhebung',
+    client:      'GfK SE',
+    location:    'REWE, Musterstraße 1, 10115 Berlin',
+    date:        '15.03.2026',
+    status:      3,
+    status_text: 'Erhebung läuft',
+    progress:    60,
+    notes:       'Erhebung läuft planmäßig. Zwischenbericht wird am 20.03.2026 übermittelt.',
+    created_at:  '10.03.2026 09:00',
+    updated_at:  '14.03.2026 16:30',
+  };
+
+  /* ============================================================
+     TRACKING-LOGIK
+     ============================================================ */
+  function showResult(order) {
+    var lang = (window.KPS_i18n && KPS_i18n.currentLang) || 'de';
+
+    // Status-Texte
+    var statusTexts = {
+      de: ['', 'Auftrag erhalten', 'In Bearbeitung', 'Erhebung läuft', 'Bericht wird erstellt', 'Abgeschlossen'],
+      en: ['', 'Order Received',   'In Progress',    'Survey Running',  'Report Being Prepared', 'Completed']
+    };
+
+    var s = order.status || 1;
+    var statusText = order.status_text || (statusTexts[lang] || statusTexts.de)[s] || '';
+
+    // Felder befüllen
+    document.getElementById('res-order-id').textContent   = order.id;
+    document.getElementById('res-order-type').textContent = order.type;
+    document.getElementById('res-client').textContent     = order.client;
+    document.getElementById('res-type').textContent       = order.type;
+    document.getElementById('res-location').textContent   = order.location;
+    document.getElementById('res-date').textContent       = order.date;
+    document.getElementById('res-created').textContent    = order.created_at;
+    document.getElementById('res-updated').textContent    = order.updated_at;
+
+    // Status-Badge
+    var badge = document.getElementById('res-status-badge');
+    badge.className = 'tracking-status-badge status-' + s;
+    document.getElementById('res-status-text').textContent = statusText;
+
+    // Stepper
+    var progressPercents = [0, 0, 25, 50, 75, 100];
+    for (var i = 1; i <= 5; i++) {
+      var stepEl = document.getElementById('step-' + i);
+      stepEl.classList.remove('done', 'active');
+      if (i < s)  stepEl.classList.add('done');
+      if (i === s) stepEl.classList.add('active');
+    }
+    // Fortschrittslinie
+    var lineWidth = progressPercents[s] || 0;
+    setTimeout(function() {
+      document.getElementById('stepper-line').style.width = lineWidth + '%';
+    }, 100);
+
+    // Fortschrittsbalken
+    var prog = order.progress || 0;
+    setTimeout(function() {
+      document.getElementById('res-progress-bar').style.width = prog + '%';
+      document.getElementById('res-progress-text').textContent = prog + '%';
+    }, 200);
+
+    // Notizen
+    if (order.notes) {
+      document.getElementById('res-notes').textContent = order.notes;
+      document.getElementById('res-notes-row').style.display = 'block';
+    } else {
+      document.getElementById('res-notes-row').style.display = 'none';
+    }
+
+    // Ansicht wechseln
+    document.getElementById('tracking-login').style.display = 'none';
+    document.getElementById('demo-hint').style.display      = 'none';
+    document.getElementById('tracking-result').classList.add('visible');
+
+    // i18n neu anwenden
+    if (window.KPS_i18n) KPS_i18n.apply();
+  }
+
+  function doTracking() {
+    var id   = document.getElementById('track-id').value.trim().toUpperCase();
+    var code = document.getElementById('track-code').value.trim();
+    var btn  = document.getElementById('tracking-submit-btn');
+    var err  = document.getElementById('tracking-error');
+
+    if (!id || !code) return;
+
+    btn.disabled = true;
+    err.classList.remove('visible');
+
+    // Demo-Modus
+    if (id === 'AUF-2024-0042' && code === 'DEMO2024') {
+      setTimeout(function() {
+        btn.disabled = false;
+        showResult(DEMO_ORDER);
+      }, 600);
+      return;
+    }
+
+    // API-Anfrage
+    fetch('tracking-api.php?action=get&id=' + encodeURIComponent(id) + '&code=' + encodeURIComponent(code))
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        btn.disabled = false;
+        // Kompatibel mit alter API (res.data) und neuer API (res.order)
+        var orderData = res.order || res.data || null;
+        if (res.success && orderData) {
+          showResult(orderData);
+        } else {
+          err.textContent = res.message || (KPS_i18n ? KPS_i18n.t('track_not_found') : 'Auftrag nicht gefunden.');
+          err.classList.add('visible');
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        err.textContent = KPS_i18n ? KPS_i18n.t('track_not_found') : 'Auftrag nicht gefunden.';
+        err.classList.add('visible');
+      });
+  }
+
+  document.getElementById('tracking-submit-btn').addEventListener('click', doTracking);
+  document.getElementById('track-id').addEventListener('keydown', function(e) { if (e.key === 'Enter') doTracking(); });
+  document.getElementById('track-code').addEventListener('keydown', function(e) { if (e.key === 'Enter') doTracking(); });
+
+  document.getElementById('tracking-back-btn').addEventListener('click', function() {
+    document.getElementById('tracking-result').classList.remove('visible');
+    document.getElementById('tracking-login').style.display = 'block';
+    document.getElementById('demo-hint').style.display      = 'block';
+    document.getElementById('tracking-error').classList.remove('visible');
+    document.getElementById('track-id').value   = '';
+    document.getElementById('track-code').value = '';
+  });
+
+  // URL-Parameter vorausfüllen (?id=AUF-...&code=...)
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var id   = params.get('id');
+    var code = params.get('code');
+    if (id)   document.getElementById('track-id').value   = id;
+    if (code) document.getElementById('track-code').value = code;
+    if (id && code) setTimeout(doTracking, 500);
+  })();
+  </script>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+  </script>
+  <script src="schema.js"></script>
+    <script src="tracker.js"></script>
+  </body>
+</html>

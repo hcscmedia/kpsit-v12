@@ -1,0 +1,25 @@
+# KPS-IT.de – robots.txt
+# Zuletzt aktualisiert: 2026-03-09
+
+User-agent: *
+Allow: /
+Disallow: /admin.php
+Disallow: /data/
+Disallow: /send.php
+Disallow: /tracking-api.php
+Disallow: /nachweis-api.php
+Disallow: /institutes-api.php
+Disallow: /db.php
+Disallow: /setup-db.sql
+Disallow: /offline.html
+
+Sitemap: https://www.kps-it.de/sitemap.xml
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
