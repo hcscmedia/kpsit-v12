@@ -2,48 +2,33 @@
 /**
  * KPS-IT.de Admin Dashboard v2 – Modern Dark Design
  */
-define('ADMIN_PASSWORD', 'Chkk#231088blnKoellner');
-define('DATA_DIR', __DIR__ . '/data/');
-define('SESSION_TIMEOUT', 3600);
-// db.php für MySQL/JSON-Fallback laden (USE_DB=false = nur JSON)
-define('USE_DB', false); // Auf true setzen wenn MySQL konfiguriert
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/admin-auth.php';
+kps_session_start();
 
-session_start();
-
-function isLoggedIn(): bool {
-    if (!isset($_SESSION['admin_logged_in'])) return false;
-    if (time() - ($_SESSION['last_activity'] ?? 0) > SESSION_TIMEOUT) {
-        session_destroy(); return false;
-    }
-    $_SESSION['last_activity'] = time();
-    return true;
-}
-
-$lockFile = DATA_DIR . '.login_attempts';
-function getAttempts(): array {
-    global $lockFile;
-    if (!file_exists($lockFile)) return ['count'=>0,'time'=>0];
-    return json_decode(file_get_contents($lockFile), true) ?: ['count'=>0,'time'=>0];
-}
-function saveAttempts(array $a): void { global $lockFile; @file_put_contents($lockFile, json_encode($a)); }
-
-$loginError = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-    $attempts = getAttempts();
-    if ($attempts['count'] >= 5 && time() - $attempts['time'] < 900) {
-        $loginError = 'Zu viele Fehlversuche. Bitte warten Sie 15 Minuten.';
-    } elseif ($_POST['password'] === ADMIN_PASSWORD) {
-        saveAttempts(['count'=>0,'time'=>0]);
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['last_activity'] = time();
+// Login verarbeiten
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'login') {
+    if (!kps_verify_admin_csrf($_POST['csrf_token'] ?? '')) die('CSRF-Fehler');
+    if (kps_process_login($_POST['password'] ?? '')) {
         header('Location: admin.php'); exit;
-    } else {
-        $attempts['count']++; $attempts['time'] = time(); saveAttempts($attempts);
-        $loginError = 'Falsches Passwort. (' . $attempts['count'] . '/5 Versuche)';
     }
+    echo kps_render_login_form('Falsches Passwort.');
+    exit;
 }
-if (isset($_GET['logout'])) { session_destroy(); header('Location: admin.php'); exit; }
+// Login-Seite anzeigen
+if (($_GET['action'] ?? '') === 'login') {
+    echo kps_render_login_form(); exit;
+}
+// Logout
+if (isset($_GET['logout'])) {
+    kps_logout('manual');
+}
+// Alle anderen Seiten schützen
+kps_require_auth();
+
+define('DATA_DIR', __DIR__ . '/data/');
+// db.php definiert USE_DB und DATA_DIR selbst per if(!defined(...))
+// Hier NICHT nochmal definieren – db.php als einzige Quelle
+require_once __DIR__ . '/db.php';
 
 @mkdir(DATA_DIR, 0750, true);
 
@@ -77,7 +62,7 @@ function loadStats(): array {
     return file_exists($f) ? (json_decode(file_get_contents($f), true) ?: []) : [];
 }
 
-if (isLoggedIn()) {
+if (true) {
     if (isset($_GET['delete_msg'])) {
         $msgs = loadMessages();
         $msgs = array_values(array_filter($msgs, fn($m) => $m['id'] !== $_GET['delete_msg']));
@@ -172,11 +157,11 @@ if (isLoggedIn()) {
 }
 
 $section  = $_GET['section'] ?? 'dashboard';
-$msgs     = isLoggedIn() ? loadMessages() : [];
-$bookings = isLoggedIn() ? loadBookings() : [];
-$orders   = isLoggedIn() ? loadOrders() : [];
-$av       = isLoggedIn() ? loadAvailability() : [];
-$stats    = isLoggedIn() ? loadStats() : [];
+$msgs     = true ? loadMessages() : [];
+$bookings = true ? loadBookings() : [];
+$orders   = true ? loadOrders() : [];
+$av       = true ? loadAvailability() : [];
+$stats    = true ? loadStats() : [];
 
 $unread       = count(array_filter($msgs, fn($m) => !($m['read'] ?? false)));
 $totalViews   = array_sum(array_column($stats, 'views'));
@@ -365,24 +350,7 @@ if ($section === 'messages' && isset($_GET['id'])) {
   </style>
 </head>
 <body>
-<?php if (!isLoggedIn()): ?>
-<div class="login-wrap">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-      <div class="login-logo-text"><div class="t1">KPS-IT.de</div><div class="t2">Admin Dashboard</div></div>
-    </div>
-    <h1 class="login-title">Anmelden</h1>
-    <p class="login-sub">Bitte geben Sie Ihr Administratorpasswort ein.</p>
-    <?php if ($loginError): ?><div class="login-error"><?= htmlspecialchars($loginError) ?></div><?php endif; ?>
-    <form method="POST" autocomplete="off">
-      <div class="field"><label for="pw">Passwort</label><input type="password" id="pw" name="password" autofocus placeholder="••••••••••" required /></div>
-      <button type="submit" class="btn-login">Einloggen</button>
-    </form>
-    <p style="margin-top:1.5rem;font-size:.72rem;color:var(--text3);text-align:center;"><a href="index.html" style="color:var(--text3);">← Zurück zur Website</a></p>
-  </div>
-</div>
-<?php else: ?>
+<?php // Dashboard (Login wird von admin-auth.php übernommen) ?>
 <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 <div class="admin-wrap">
   <aside class="sidebar" id="sidebar">
@@ -959,6 +927,5 @@ function openSidebar(){document.getElementById('sidebar').classList.add('open');
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
 function setAvDate(d){var el=document.getElementById('av-date-input');if(el)el.value=d;}
 </script>
-<?php endif;?>
 </body>
 </html>

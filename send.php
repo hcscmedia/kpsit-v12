@@ -1,6 +1,6 @@
 <?php
 /**
- * KPS-IT.de – Kontaktformular Backend v11
+ * KPS-IT.de – Kontaktformular Backend v10
  * Nutzt db.php für MySQL/JSON-Fallback Speicherung
  */
 
@@ -10,11 +10,9 @@ declare(strict_types=1);
 if (!defined('USE_DB')) define('USE_DB', false);
 require_once __DIR__ . '/db.php';
 
-// ─── KONFIGURATION ──────────────────────────────────────────────
 define('RECIPIENT_EMAIL',   'info@kps-it.de');
 define('RECIPIENT_NAME',    'KPS-IT.de Service');
-// Dies ist der Absender der Mail (Muss eine Adresse deiner Domain sein!)
-define('SENDER_FROM',       'info@kps-it.de'); 
+define('SENDER_FROM',       'noreply@kps-it.de');
 define('SITE_NAME',         'KPS-IT.de');
 define('RATE_LIMIT_MAX',    5);
 define('RATE_LIMIT_WINDOW', 600);
@@ -62,44 +60,33 @@ if (!empty($submittedToken) && isset($_SESSION[CSRF_SESSION_KEY])) {
         jsonResponse(false, 'Ungültige Sitzung. Bitte laden Sie die Seite neu.', 403);
     }
 }
+// Hinweis: CSRF wird toleriert wenn kein Token vorhanden (z.B. statischer Server)
 
-// Honeypot (Bot-Schutz)
+// Honeypot
 if (!empty($_POST['website'])) {
     jsonResponse(true, 'Nachricht wurde erfolgreich übermittelt.');
 }
 
-// Rate-Limiting (dateibasiert, threadsicher mit flock)
+// Rate-Limiting (dateibasiert)
 function checkRateLimit(string $ip): bool {
     $file = DATA_DIR . 'rate_limits.json';
     $dir  = dirname($file);
     if (!is_dir($dir)) @mkdir($dir, 0750, true);
-    
-    $fp = fopen($file, 'c+');
-    if (!$fp || !flock($fp, LOCK_EX)) return false; // Datei sperren
-
-    $raw = stream_get_contents($fp);
-    $limits = $raw ? (json_decode($raw, true) ?? []) : [];
+    $limits = [];
+    if (file_exists($file)) {
+        $raw = @file_get_contents($file);
+        $limits = $raw ? (json_decode($raw, true) ?? []) : [];
+    }
     $now = time();
     $key = hash('sha256', $ip);
-
     if (isset($limits[$key])) {
         $limits[$key] = array_values(array_filter($limits[$key], fn(int $t) => ($now - $t) < RATE_LIMIT_WINDOW));
     } else {
         $limits[$key] = [];
     }
-
-    if (count($limits[$key]) >= RATE_LIMIT_MAX) {
-        flock($fp, LOCK_UN);
-        fclose($fp);
-        return false;
-    }
-
+    if (count($limits[$key]) >= RATE_LIMIT_MAX) return false;
     $limits[$key][] = $now;
-    ftruncate($fp, 0);
-    rewind($fp);
-    fwrite($fp, json_encode($limits));
-    flock($fp, LOCK_UN);
-    fclose($fp);
+    @file_put_contents($file, json_encode($limits), LOCK_EX);
     return true;
 }
 
@@ -136,7 +123,7 @@ foreach ($spamPatterns as $p) {
 
 if (!empty($errors)) jsonResponse(false, implode(' ', $errors), 422);
 
-// Nachricht speichern
+// Nachricht speichern (MySQL oder JSON-Fallback)
 $msgId = bin2hex(random_bytes(8));
 $saved = dbSaveMessage([
     'id'      => $msgId,
@@ -148,7 +135,7 @@ $saved = dbSaveMessage([
     'ip'      => $clientIp,
 ]);
 
-// ─── ADMIN-MAIL VERSENDEN (An dich) ──────────────────────────────────
+// E-Mail versenden
 $emailName    = htmlspecialchars($name,    ENT_QUOTES, 'UTF-8');
 $emailEmail   = htmlspecialchars($email,   ENT_QUOTES, 'UTF-8');
 $emailSubject = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
@@ -179,26 +166,8 @@ HTML;
 
 $textBody = "Neue Kontaktanfrage – KPS-IT.de\nEingegangen: {$timestamp}\n\nName: {$name}\nE-Mail: {$email}\nBetreff: {$subject}\n\nNachricht:\n{$message}\n";
 $boundary = '----=_Part_' . md5(uniqid('', true));
-
-// Header für die Mail an dich
-$headers = implode("\r\n", [
-    "From: " . SITE_NAME . " <" . SENDER_FROM . ">",
-    "Reply-To: {$name} <{$email}>",
-    "MIME-Version: 1.0",
-    "Content-Type: multipart/alternative; boundary=\"{$boundary}\"",
-    "X-Mailer: PHP/" . phpversion()
-]);
-
-$body = "--{$boundary}\r\n" .
-        "Content-Type: text/plain; charset=UTF-8\r\n" .
-        "Content-Transfer-Encoding: 8bit\r\n\r\n" .
-        "{$textBody}\r\n" .
-        "--{$boundary}\r\n" .
-        "Content-Type: text/html; charset=UTF-8\r\n" .
-        "Content-Transfer-Encoding: 8bit\r\n\r\n" .
-        "{$htmlBody}\r\n" .
-        "--{$boundary}--";
-
+$headers  = "From: " . SITE_NAME . " <" . SENDER_FROM . ">\r\nReply-To: {$name} <{$email}>\r\nMIME-Version: 1.0\r\nContent-Type: multipart/alternative; boundary=\"{$boundary}\"\r\nX-Mailer: PHP/" . phpversion() . "\r\n";
+$body     = "--{$boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n{$textBody}\r\n--{$boundary}\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n{$htmlBody}\r\n--{$boundary}--";
 $mailSubject = '=?UTF-8?B?' . base64_encode('[KPS-IT.de] ' . $subject . ' – ' . $name) . '?=';
 $sent = @mail(RECIPIENT_EMAIL, $mailSubject, $body, $headers);
 
@@ -207,80 +176,15 @@ if (isset($_SESSION[CSRF_SESSION_KEY])) {
     $_SESSION[CSRF_SESSION_KEY] = bin2hex(random_bytes(32));
 }
 
-// ─── BESTÄTIGUNGS-MAIL AN KUNDEN (HTML) ─────────────────────────────
+// Bestätigungs-E-Mail
 if ($sent) {
-    // Array-Methode ist zwingend nötig, damit Server die HTML-Header nicht zerschießen
-    $confHeaders = implode("\r\n", [
-        "From: " . SITE_NAME . " <" . SENDER_FROM . ">",
-        "Reply-To: " . SENDER_FROM,
-        "MIME-Version: 1.0",
-        "Content-Type: text/html; charset=UTF-8"
-    ]);
-    
-    $confSubject = '=?UTF-8?B?' . base64_encode('Vielen Dank für Ihre Anfrage bei KPS-IT.de') . '?=';
-    
-    $confBody = <<<HTML
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; color: #334155; -webkit-font-smoothing: antialiased;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f8fafc;">
-    <tr>
-      <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 20px; margin-bottom: 20px;">
-          
-          <tr>
-            <td style="background-color: #0f172a; padding: 35px 30px; text-align: center; border-bottom: 4px solid #6366f1;">
-              <h1 style="color: #ffffff; font-size: 26px; margin: 0; font-weight: 800; letter-spacing: -0.5px;">KPS<span style="color: #6366f1;">-IT.de</span></h1>
-            </td>
-          </tr>
-          
-          <tr>
-            <td style="padding: 40px 35px;">
-              <h2 style="color: #0f172a; font-size: 20px; margin-top: 0; margin-bottom: 15px; font-weight: 700;">Hallo {$name},</h2>
-              <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">vielen Dank für Ihre Nachricht! Wir haben Ihre Anfrage erfolgreich erhalten und werden uns schnellstmöglich darum kümmern.</p>
-              
-              <div style="background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 25px 0;">
-                <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: 600; color: #0f172a;">Ihre Angaben im Überblick:</p>
-                <p style="margin: 5px 0; font-size: 15px; color: #475569;"><strong style="color: #0f172a; font-weight: 600;">Betreff:</strong> {$subject}</p>
-                <p style="margin: 5px 0; font-size: 15px; color: #475569;"><strong style="color: #0f172a; font-weight: 600;">Datum:</strong> {$timestamp}</p>
-              </div>
-              
-              <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">Sollten Sie in der Zwischenzeit Fragen haben oder weitere Informationen nachreichen wollen, können Sie einfach direkt auf diese E-Mail antworten.</p>
-              
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 35px 0 15px;">
-                <tr>
-                  <td align="center">
-                    <a href="https://kps-it.de" style="background-color: #6366f1; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block;">Zurück zur Website</a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          
-          <tr>
-            <td style="background-color: #f1f5f9; padding: 25px 30px; text-align: center; font-size: 13px; color: #64748b; border-top: 1px solid #e2e8f0;">
-              Diese E-Mail wurde automatisch generiert.<br><br>
-              &copy; 2026 KPS-IT.de &middot; 
-              <a href="https://kps-it.de/impressum.html" style="color: #6366f1; text-decoration: none;">Impressum</a> &middot; 
-              <a href="https://kps-it.de/datenschutz.html" style="color: #6366f1; text-decoration: none;">Datenschutz</a>
-            </td>
-          </tr>
-          
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-HTML;
-
+    $confHeaders = "From: " . SITE_NAME . " <" . SENDER_FROM . ">\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\n";
+    $confSubject = '=?UTF-8?B?' . base64_encode('Ihre Anfrage bei KPS-IT.de') . '?=';
+    $confBody    = "Sehr geehrte/r {$name},\n\nvielen Dank für Ihre Nachricht. Ich habe Ihre Anfrage erhalten und melde mich in Kürze.\n\nIhre Angaben:\nBetreff: {$subject}\n\nMit freundlichen Grüßen\n" . SITE_NAME . "\nhttps://kps-it.de";
     @mail($email, $confSubject, $confBody, $confHeaders);
     jsonResponse(true, 'Ihre Nachricht wurde erfolgreich übermittelt. Ich melde mich in Kürze.');
 } else {
+    // E-Mail fehlgeschlagen, aber Nachricht wurde gespeichert
     if ($saved) {
         jsonResponse(true, 'Ihre Nachricht wurde gespeichert. Ich melde mich in Kürze bei Ihnen.');
     } else {
