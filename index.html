@@ -34,8 +34,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="preload" href="style.css" as="style" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="style.css?v=3" as="style" />
+  <link rel="stylesheet" href="style.css?v=3" />
   <link rel="stylesheet" href="features.css" />
   <link rel="stylesheet" href="features2.css" />
   <!-- PWA -->
@@ -288,174 +288,86 @@
 
       <!-- Hero Visual Mobile: unter den Buttons auf Mobile -->
       <div class="hero-visual-mobile" aria-hidden="true">
-        <div class="hero-scene">
-          <!-- Regal (kompakt) -->
-          <svg class="shelf-svg" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="10" width="300" height="400" rx="8" fill="none" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
-            <rect x="10" y="120" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <rect x="10" y="240" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <rect x="10" y="360" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <rect x="25"  y="75"  width="28" height="42" rx="3" fill="rgba(99,102,241,0.6)" class="shelf-item"/>
-            <rect x="60"  y="80"  width="22" height="37" rx="3" fill="rgba(16,185,129,0.6)" class="shelf-item"/>
-            <rect x="90"  y="72"  width="30" height="45" rx="3" fill="rgba(245,158,11,0.5)" class="shelf-item"/>
-            <rect x="128" y="78"  width="25" height="39" rx="3" fill="rgba(99,102,241,0.5)" class="shelf-item"/>
-            <rect x="160" y="82"  width="20" height="35" rx="3" fill="rgba(239,68,68,0.5)"  class="shelf-item"/>
-            <rect x="188" y="75"  width="28" height="42" rx="3" fill="rgba(16,185,129,0.55)" class="shelf-item"/>
-            <rect x="224" y="79"  width="24" height="38" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-            <rect x="256" y="73"  width="30" height="44" rx="3" fill="rgba(245,158,11,0.6)" class="shelf-item"/>
-            <rect x="25"  y="195" width="26" height="40" rx="3" fill="rgba(16,185,129,0.5)" class="shelf-item"/>
-            <rect x="58"  y="200" width="30" height="35" rx="3" fill="rgba(99,102,241,0.6)" class="shelf-item"/>
-            <rect x="96"  y="193" width="22" height="42" rx="3" fill="rgba(239,68,68,0.55)" class="shelf-item"/>
-            <rect x="126" y="198" width="28" height="37" rx="3" fill="rgba(245,158,11,0.5)" class="shelf-item"/>
-            <rect x="162" y="195" width="24" height="40" rx="3" fill="rgba(99,102,241,0.5)" class="shelf-item"/>
-            <rect x="194" y="200" width="20" height="35" rx="3" fill="rgba(16,185,129,0.6)" class="shelf-item"/>
-            <rect x="222" y="194" width="30" height="41" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-            <rect x="260" y="197" width="26" height="38" rx="3" fill="rgba(239,68,68,0.5)"  class="shelf-item"/>
-            <rect x="25"  y="315" width="24" height="38" rx="3" fill="rgba(245,158,11,0.55)" class="shelf-item"/>
-            <rect x="56"  y="318" width="28" height="35" rx="3" fill="rgba(99,102,241,0.6)"  class="shelf-item"/>
-            <rect x="92"  y="312" width="22" height="41" rx="3" fill="rgba(16,185,129,0.5)"  class="shelf-item"/>
-            <rect x="122" y="316" width="30" height="37" rx="3" fill="rgba(239,68,68,0.55)"  class="shelf-item"/>
-            <rect x="160" y="314" width="26" height="39" rx="3" fill="rgba(99,102,241,0.5)"  class="shelf-item"/>
-            <rect x="194" y="318" width="22" height="35" rx="3" fill="rgba(245,158,11,0.6)"  class="shelf-item"/>
-            <rect x="224" y="313" width="28" height="40" rx="3" fill="rgba(16,185,129,0.55)" class="shelf-item"/>
-            <rect x="260" y="316" width="26" height="37" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-          </svg>
-          <!-- Männchen -->
-          <div class="shopper-figure">
-            <svg class="shopper-svg" viewBox="0 0 80 160" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="40" cy="22" r="16" fill="#6366f1" opacity="0.9"/>
-              <ellipse cx="40" cy="10" rx="14" ry="6" fill="#4f46e5"/>
-              <circle cx="35" cy="21" r="2" fill="white" opacity="0.9"/>
-              <circle cx="45" cy="21" r="2" fill="white" opacity="0.9"/>
-              <path d="M35 28 Q40 32 45 28" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <rect x="24" y="40" width="32" height="50" rx="6" fill="#4f46e5" opacity="0.9"/>
-              <line x1="40" y1="42" x2="40" y2="88" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <rect x="35" y="48" width="10" height="14" rx="2" fill="#10b981" opacity="0.8"/>
-              <text x="40" y="58" text-anchor="middle" font-size="5" fill="white" font-weight="bold">KPS</text>
-              <line x1="24" y1="52" x2="2" y2="70" stroke="#4f46e5" stroke-width="8" stroke-linecap="round" class="arm-left"/>
-              <line x1="56" y1="52" x2="70" y2="68" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"/>
-              <rect x="-10" y="62" width="14" height="22" rx="3" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" class="phone"/>
-              <rect x="-8"  y="65" width="10" height="14" rx="1" fill="#0ea5e9" opacity="0.8" class="phone-screen"/>
-              <rect x="26" y="90" width="12" height="45" rx="5" fill="#3730a3" opacity="0.9"/>
-              <rect x="42" y="90" width="12" height="45" rx="5" fill="#3730a3" opacity="0.9"/>
-              <ellipse cx="32" cy="136" rx="10" ry="5" fill="#1e1b4b"/>
-              <ellipse cx="48" cy="136" rx="10" ry="5" fill="#1e1b4b"/>
+          <div class="hero-scene">
+            <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+              <g filter="drop-shadow(0 10px 15px rgba(0,0,0,0.1))">
+                <rect x="20" y="40" width="220" height="340" rx="12" fill="var(--bg-elevated)" stroke="var(--border)" stroke-width="2"/>
+                <rect x="20" y="140" width="220" height="8" fill="var(--border)"/>
+                <rect x="20" y="250" width="220" height="8" fill="var(--border)"/>
+                <rect x="40" y="70" width="35" height="70" rx="4" fill="var(--bg-surface)" stroke="var(--border-accent)" stroke-width="2"/>
+                <rect x="90" y="90" width="45" height="50" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="2"/>
+                <path d="M 155 140 L 155 80 C 155 70, 180 70, 180 80 L 180 140 Z" fill="var(--success-subtle)" stroke="var(--success)" stroke-width="2"/>
+                <rect x="45" y="190" width="45" height="60" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="2"/>
+                <circle cx="130" cy="215" r="26" fill="var(--bg-surface)" stroke="var(--border-accent)" stroke-width="2"/>
+                <rect x="175" y="160" width="40" height="90" rx="4" fill="var(--success-subtle)" stroke="var(--success)" stroke-width="2"/>
+              </g>
+              <g class="shopper-figure" transform="translate(140, 160)">
+                <path d="M 40 260 C 40 140, 160 140, 160 260 Z" fill="var(--accent)"/>
+                <circle cx="100" cy="100" r="35" fill="var(--text-primary)"/>
+                <path d="M 90 140 L 110 140 L 100 165 Z" fill="var(--success)"/>
+                <path d="M 70 170 L 20 200 L 40 230" fill="none" stroke="var(--text-primary)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="-15" y="175" width="60" height="85" rx="8" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="4" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="190" width="30" height="6" rx="3" fill="var(--success)" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="205" width="45" height="6" rx="3" fill="var(--accent)" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="220" width="25" height="6" rx="3" fill="var(--text-muted)" transform="rotate(-25 15 215)"/>
+                <polygon points="-5,185 -140,260 -120,130" fill="var(--accent-glow)" class="scan-beam"/>
+              </g>
             </svg>
-            <div class="camera-flash" aria-hidden="true"></div>
+
+            <div class="data-chip chip-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Preiserhebung
+            </div>
+            <div class="data-chip chip-2">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Fotodoku
+            </div>
+            <div class="data-chip chip-3">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verifiziert
+            </div>
           </div>
-          <!-- Daten-Chips -->
-          <div class="data-chip chip-1">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            Preiserhebung
-          </div>
-          <div class="data-chip chip-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Fotodoku
-          </div>
-          <div class="data-chip chip-3">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Verifiziert
+        </div> <div class="hero-visual" aria-hidden="true">
+          <div class="hero-scene">
+            <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+              <g filter="drop-shadow(0 10px 15px rgba(0,0,0,0.1))">
+                <rect x="20" y="40" width="220" height="340" rx="12" fill="var(--bg-elevated)" stroke="var(--border)" stroke-width="2"/>
+                <rect x="20" y="140" width="220" height="8" fill="var(--border)"/>
+                <rect x="20" y="250" width="220" height="8" fill="var(--border)"/>
+                <rect x="40" y="70" width="35" height="70" rx="4" fill="var(--bg-surface)" stroke="var(--border-accent)" stroke-width="2"/>
+                <rect x="90" y="90" width="45" height="50" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="2"/>
+                <path d="M 155 140 L 155 80 C 155 70, 180 70, 180 80 L 180 140 Z" fill="var(--success-subtle)" stroke="var(--success)" stroke-width="2"/>
+                <rect x="45" y="190" width="45" height="60" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="2"/>
+                <circle cx="130" cy="215" r="26" fill="var(--bg-surface)" stroke="var(--border-accent)" stroke-width="2"/>
+                <rect x="175" y="160" width="40" height="90" rx="4" fill="var(--success-subtle)" stroke="var(--success)" stroke-width="2"/>
+              </g>
+              <g class="shopper-figure" transform="translate(140, 160)">
+                <path d="M 40 260 C 40 140, 160 140, 160 260 Z" fill="var(--accent)"/>
+                <circle cx="100" cy="100" r="35" fill="var(--text-primary)"/>
+                <path d="M 90 140 L 110 140 L 100 165 Z" fill="var(--success)"/>
+                <path d="M 70 170 L 20 200 L 40 230" fill="none" stroke="var(--text-primary)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="-15" y="175" width="60" height="85" rx="8" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="4" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="190" width="30" height="6" rx="3" fill="var(--success)" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="205" width="45" height="6" rx="3" fill="var(--accent)" transform="rotate(-25 15 215)"/>
+                <rect x="0" y="220" width="25" height="6" rx="3" fill="var(--text-muted)" transform="rotate(-25 15 215)"/>
+                <polygon points="-5,185 -140,260 -120,130" fill="var(--accent-glow)" class="scan-beam"/>
+              </g>
+            </svg>
+
+            <div class="data-chip chip-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Preiserhebung
+            </div>
+            <div class="data-chip chip-2">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Fotodoku
+            </div>
+            <div class="data-chip chip-3">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verifiziert
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Hero Visual: Mystery Shopper Animation -->
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-scene">
-          <!-- Regal -->
-          <svg class="shelf-svg" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
-            <!-- Regal-Rahmen -->
-            <rect x="10" y="10" width="300" height="400" rx="8" fill="none" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
-            <!-- Regal-Bretter -->
-            <rect x="10" y="120" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <rect x="10" y="240" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <rect x="10" y="360" width="300" height="8" rx="2" fill="rgba(99,102,241,0.25)"/>
-            <!-- Produkte Regal 1 -->
-            <rect x="25"  y="75"  width="28" height="42" rx="3" fill="rgba(99,102,241,0.6)" class="shelf-item"/>
-            <rect x="60"  y="80"  width="22" height="37" rx="3" fill="rgba(16,185,129,0.6)" class="shelf-item"/>
-            <rect x="90"  y="72"  width="30" height="45" rx="3" fill="rgba(245,158,11,0.5)" class="shelf-item"/>
-            <rect x="128" y="78"  width="25" height="39" rx="3" fill="rgba(99,102,241,0.5)" class="shelf-item"/>
-            <rect x="160" y="82"  width="20" height="35" rx="3" fill="rgba(239,68,68,0.5)"  class="shelf-item"/>
-            <rect x="188" y="75"  width="28" height="42" rx="3" fill="rgba(16,185,129,0.55)" class="shelf-item"/>
-            <rect x="224" y="79"  width="24" height="38" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-            <rect x="256" y="73"  width="30" height="44" rx="3" fill="rgba(245,158,11,0.6)" class="shelf-item"/>
-            <!-- Produkte Regal 2 -->
-            <rect x="25"  y="195" width="26" height="40" rx="3" fill="rgba(16,185,129,0.5)" class="shelf-item"/>
-            <rect x="58"  y="200" width="30" height="35" rx="3" fill="rgba(99,102,241,0.6)" class="shelf-item"/>
-            <rect x="96"  y="193" width="22" height="42" rx="3" fill="rgba(239,68,68,0.55)" class="shelf-item"/>
-            <rect x="126" y="198" width="28" height="37" rx="3" fill="rgba(245,158,11,0.5)" class="shelf-item"/>
-            <rect x="162" y="195" width="24" height="40" rx="3" fill="rgba(99,102,241,0.5)" class="shelf-item"/>
-            <rect x="194" y="200" width="20" height="35" rx="3" fill="rgba(16,185,129,0.6)" class="shelf-item"/>
-            <rect x="222" y="194" width="30" height="41" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-            <rect x="260" y="197" width="26" height="38" rx="3" fill="rgba(239,68,68,0.5)"  class="shelf-item"/>
-            <!-- Produkte Regal 3 -->
-            <rect x="25"  y="315" width="24" height="38" rx="3" fill="rgba(245,158,11,0.55)" class="shelf-item"/>
-            <rect x="56"  y="318" width="28" height="35" rx="3" fill="rgba(99,102,241,0.6)"  class="shelf-item"/>
-            <rect x="92"  y="312" width="22" height="41" rx="3" fill="rgba(16,185,129,0.5)"  class="shelf-item"/>
-            <rect x="122" y="316" width="30" height="37" rx="3" fill="rgba(239,68,68,0.55)"  class="shelf-item"/>
-            <rect x="160" y="314" width="26" height="39" rx="3" fill="rgba(99,102,241,0.5)"  class="shelf-item"/>
-            <rect x="194" y="318" width="22" height="35" rx="3" fill="rgba(245,158,11,0.6)"  class="shelf-item"/>
-            <rect x="224" y="313" width="28" height="40" rx="3" fill="rgba(16,185,129,0.55)" class="shelf-item"/>
-            <rect x="260" y="316" width="26" height="37" rx="3" fill="rgba(99,102,241,0.45)" class="shelf-item"/>
-            <!-- Preis-Tags -->
-            <rect x="25"  y="117" width="28" height="6" rx="1" fill="rgba(255,255,255,0.15)"/>
-            <rect x="60"  y="117" width="22" height="6" rx="1" fill="rgba(255,255,255,0.15)"/>
-            <rect x="90"  y="117" width="30" height="6" rx="1" fill="rgba(255,255,255,0.15)"/>
-          </svg>
-
-          <!-- Männchen (Mystery Shopper) -->
-          <div class="shopper-figure">
-            <svg class="shopper-svg" viewBox="0 0 80 160" xmlns="http://www.w3.org/2000/svg">
-              <!-- Kopf -->
-              <circle cx="40" cy="22" r="16" fill="#6366f1" opacity="0.9"/>
-              <!-- Haare -->
-              <ellipse cx="40" cy="10" rx="14" ry="6" fill="#4f46e5"/>
-              <!-- Gesicht -->
-              <circle cx="35" cy="21" r="2" fill="white" opacity="0.9"/>
-              <circle cx="45" cy="21" r="2" fill="white" opacity="0.9"/>
-              <path d="M35 28 Q40 32 45 28" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <!-- Körper -->
-              <rect x="24" y="40" width="32" height="50" rx="6" fill="#4f46e5" opacity="0.9"/>
-              <!-- Hemd-Details -->
-              <line x1="40" y1="42" x2="40" y2="88" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <!-- Krawatte / Abzeichen -->
-              <rect x="35" y="48" width="10" height="14" rx="2" fill="#10b981" opacity="0.8"/>
-              <text x="40" y="58" text-anchor="middle" font-size="5" fill="white" font-weight="bold">KPS</text>
-              <!-- Arm links (nach vorne gestreckt mit Handy) -->
-              <line x1="24" y1="52" x2="2" y2="70" stroke="#4f46e5" stroke-width="8" stroke-linecap="round" class="arm-left"/>
-              <!-- Arm rechts -->
-              <line x1="56" y1="52" x2="70" y2="68" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"/>
-              <!-- Handy -->
-              <rect x="-10" y="62" width="14" height="22" rx="3" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" class="phone"/>
-              <rect x="-8"  y="65" width="10" height="14" rx="1" fill="#0ea5e9" opacity="0.8" class="phone-screen"/>
-              <!-- Kamera-Blitz -->
-              <circle cx="-3" cy="80" r="2" fill="white" opacity="0.5" class="camera-dot"/>
-              <!-- Beine -->
-              <rect x="26" y="90" width="12" height="45" rx="5" fill="#3730a3" opacity="0.9"/>
-              <rect x="42" y="90" width="12" height="45" rx="5" fill="#3730a3" opacity="0.9"/>
-              <!-- Schuhe -->
-              <ellipse cx="32" cy="136" rx="10" ry="5" fill="#1e1b4b"/>
-              <ellipse cx="48" cy="136" rx="10" ry="5" fill="#1e1b4b"/>
-            </svg>
-            <!-- Kamera-Flash-Effekt -->
-            <div class="camera-flash" aria-hidden="true"></div>
-          </div>
-
-          <!-- Schwebende Daten-Chips -->
-          <div class="data-chip chip-1">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            Preiserhebung
-          </div>
-          <div class="data-chip chip-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Fotodoku
-          </div>
-          <div class="data-chip chip-3">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Verifiziert
-          </div>
-        </div>
-      </div>
 
         <!-- Scroll indicator -->
         <div class="scroll-indicator" aria-hidden="true">
@@ -1073,7 +985,7 @@
   <script src="main.js"></script>
   <script src="i18n.js"></script>
   <script src="cookie-banner.js"></script>
-  <script src="kps-map.js" defer></script>
+  <script src="kps-map.js?v=2" defer></script>
   <script src="features2.js"></script>
 
   <!-- PWA: Service Worker Registrierung -->

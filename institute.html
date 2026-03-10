@@ -652,5 +652,28 @@
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}</script>
   <script src="schema.js"></script>
   <script src="tracker.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', async () => {
+   try {
+      // Lädt die Datei, in die die admin.php die Institute speichert
+      const res = await fetch('data/institutes.json?v=' + new Date().getTime());
+      
+      if(!res.ok) throw new Error("Datei nicht gefunden");
+      
+      const data = await res.json();
+      
+      // Da die API die Daten als { "inst_1": {...}, "inst_2": {...} } speichert, 
+      // wandeln wir sie in ein Array um:
+      const institutesArray = Object.values(data);
+      
+      // HIER KOMMT DEINE RENDER-FUNKTION FÜR DAS FRONTEND HIN
+      // z.B. renderFrontendInstitutes(institutesArray);
+      console.log("Erfolgreich geladen:", institutesArray);
+      
+   } catch (err) {
+      console.error("Es konnten keine Institute geladen werden:", err);
+   }
+});
+</script>
 </body>
 </html>

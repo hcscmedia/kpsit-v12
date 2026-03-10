@@ -573,10 +573,12 @@ if ($section === 'messages' && isset($_GET['id'])) {
         </tbody>
       </table>
       </div></div>
-      <?php endif;?>
-
+<?php endif; ?>
+      
+      <?php
       // INSTITUTES
       elseif($section==='institutes'):
+      ?>
 ?>
 <div class="section-header-bar">
   <div>
@@ -764,17 +766,23 @@ if ($section === 'messages' && isset($_GET['id'])) {
 <script>
 let allInstitutes=[];
 let deleteTargetId=null;
-const LS_KEY='kps_institutes_v2';
 
-function lsLoad(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){return [];}}
-function lsSave(data){localStorage.setItem(LS_KEY,JSON.stringify(data));}
-function genId(){return 'inst_'+Math.random().toString(36).substr(2,8);}
-
-function loadInstitutes(){
-  allInstitutes=lsLoad();
-  renderInstitutes(allInstitutes);
+// 1. Institute vom Server laden
+async function loadInstitutes(){
+  try {
+    const res = await fetch('institutes-api.php?action=list');
+    const json = await res.json();
+    if(json.success) {
+      allInstitutes = json.data || [];
+      renderInstitutes(allInstitutes);
+    }
+  } catch(e) {
+    console.error('Ladefehler:', e);
+    document.getElementById('inst-list').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;">Fehler beim Laden der Institute vom Server.</div>';
+  }
 }
 
+// (Hier bleibt die alte renderInstitutes, filterInstitutes, openInstModal und closeInstModal Funktion genau so stehen wie sie war!)
 function renderInstitutes(list){
   const c=document.getElementById('inst-list');
   const cnt=document.getElementById('inst-count');
@@ -821,9 +829,9 @@ function openInstModal(data){
   document.getElementById('inst-color').value=data?data.color:'#6366f1';
   document.getElementById('inst-color-val').textContent=data?data.color:'#6366f1';
   document.getElementById('inst-website').value=data?data.website:'';
-  document.getElementById('inst-contact').value=data?data.contact||':'';
-  document.getElementById('inst-email').value=data?data.email||':'';
-  document.getElementById('inst-phone').value=data?data.phone||':'';
+  document.getElementById('inst-contact').value = data ? data.contact || '' : '';
+  document.getElementById('inst-email').value   = data ? data.email || '' : '';
+  document.getElementById('inst-phone').value   = data ? data.phone || '' : '';
   document.getElementById('inst-description').value=data?data.description:'';
   document.getElementById('inst-tags').value=data?(data.tags||[]).join(', '):'';
   document.getElementById('inst-status').value=data?data.status||'active':'active';
@@ -833,48 +841,54 @@ function openInstModal(data){
 }
 
 function closeInstModal(){document.getElementById('inst-modal').style.display='none';}
-
 function editInstitute(id){const i=allInstitutes.find(x=>x.id===id);if(i)openInstModal(i);}
 
-function saveInstitute(e){
+// 2. Institut auf dem Server speichern
+async function saveInstitute(e){
   e.preventDefault();
   const btn=document.getElementById('inst-save-btn');
   btn.disabled=true;btn.textContent='Speichern...';
+  
   const id=document.getElementById('inst-id').value;
   const name=document.getElementById('inst-name').value.trim();
   if(!name){showAdminToast('Name ist erforderlich','error');btn.disabled=false;btn.textContent='Speichern';return;}
+  
   const payload={
-    id:id||genId(),
-    name,
-    short:document.getElementById('inst-short').value.trim()||name.substring(0,3).toUpperCase(),
-    type:document.getElementById('inst-type').value,
-    priority:document.getElementById('inst-priority').value,
-    color:document.getElementById('inst-color').value,
-    website:document.getElementById('inst-website').value.trim(),
-    contact:document.getElementById('inst-contact').value.trim(),
-    email:document.getElementById('inst-email').value.trim(),
-    phone:document.getElementById('inst-phone').value.trim(),
-    description:document.getElementById('inst-description').value.trim(),
-    tags:document.getElementById('inst-tags').value.split(',').map(t=>t.trim()).filter(Boolean),
-    status:document.getElementById('inst-status').value,
-    featured:document.getElementById('inst-featured').checked,
-    created_at:id?undefined:new Date().toISOString(),
-    updated_at:new Date().toISOString(),
+    id: id,
+    name: name,
+    short: document.getElementById('inst-short').value.trim(),
+    type: document.getElementById('inst-type').value,
+    priority: document.getElementById('inst-priority').value,
+    color: document.getElementById('inst-color').value,
+    website: document.getElementById('inst-website').value.trim(),
+    contact: document.getElementById('inst-contact').value.trim(),
+    email: document.getElementById('inst-email').value.trim(),
+    phone: document.getElementById('inst-phone').value.trim(),
+    description: document.getElementById('inst-description').value.trim(),
+    tags: document.getElementById('inst-tags').value,
+    status: document.getElementById('inst-status').value,
+    featured: document.getElementById('inst-featured').checked
   };
-  const list=lsLoad();
-  if(id){
-    const idx=list.findIndex(x=>x.id===id);
-    if(idx>=0){payload.created_at=list[idx].created_at;list[idx]=payload;}
-    else list.push(payload);
-    showAdminToast('Institut aktualisiert','success');
-  }else{
-    payload.created_at=payload.updated_at;
-    list.push(payload);
-    showAdminToast('Institut hinzugefügt','success');
+
+  try {
+    const action = id ? 'update' : 'add';
+    const res = await fetch('institutes-api.php?action=' + action, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if(result.success) {
+      showAdminToast(result.message, 'success');
+      closeInstModal();
+      loadInstitutes(); // Lade frische Daten vom Server
+    } else {
+      showAdminToast(result.error || 'Fehler', 'error');
+    }
+  } catch(e) {
+    showAdminToast('Netzwerkfehler', 'error');
   }
-  lsSave(list);
-  closeInstModal();
-  loadInstitutes();
+  
   btn.disabled=false;btn.textContent='Speichern';
 }
 
@@ -884,13 +898,24 @@ function deleteInstitute(id,name){
   document.getElementById('inst-delete-modal').style.display='flex';
 }
 
-function confirmDeleteInstitute(){
+// 3. Institut vom Server löschen
+async function confirmDeleteInstitute(){
   if(!deleteTargetId)return;
-  const list=lsLoad().filter(x=>x.id!==deleteTargetId);
-  lsSave(list);
-  document.getElementById('inst-delete-modal').style.display='none';
-  loadInstitutes();
-  showAdminToast('Institut gelöscht','success');
+  try {
+    const res = await fetch('institutes-api.php?action=delete', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id: deleteTargetId})
+    });
+    const result = await res.json();
+    if(result.success) {
+      showAdminToast(result.message, 'success');
+      document.getElementById('inst-delete-modal').style.display='none';
+      loadInstitutes(); // Lade frische Daten vom Server
+    }
+  } catch(e) {
+    showAdminToast('Fehler beim Löschen', 'error');
+  }
   deleteTargetId=null;
 }
 
@@ -907,6 +932,7 @@ document.getElementById('inst-color').addEventListener('input',function(){
   document.getElementById('inst-color-val').textContent=this.value;
 });
 
+// Init
 loadInstitutes();
 </script>
 <?php

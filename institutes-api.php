@@ -10,7 +10,7 @@ header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
 // ─── Auth-Check ───────────────────────────────────────────────
-if (empty($_SESSION['kps_admin'])) {
+if (empty($_SESSION['admin_logged_in'])) {
     http_response_code(401);
     echo json_encode(['error' => 'Nicht autorisiert']);
     exit;
