@@ -5,7 +5,11 @@
  * Speichert Institute als JSON in data/institutes.json
  */
 
-session_start();
+declare(strict_types=1);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(['cookie_httponly' => true, 'cookie_samesite' => 'Strict']);
+}
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
@@ -41,9 +45,35 @@ function generateId() {
     return 'inst_' . substr(md5(uniqid(mt_rand(), true)), 0, 8);
 }
 
+function readInput(): array {
+    $raw = file_get_contents('php://input') ?: '';
+    $json = json_decode($raw, true);
+    if (is_array($json)) {
+        return $json;
+    }
+    $parsed = [];
+    parse_str($raw, $parsed);
+    return is_array($parsed) ? $parsed : [];
+}
+
+function verifyCsrfToken(array $input): bool {
+    $token = (string)($input['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
+    $valid = (string)($_SESSION['admin_csrf_token'] ?? '');
+    return $token !== '' && $valid !== '' && hash_equals($valid, $token);
+}
+
 // ─── Request-Routing ─────────────────────────────────────────
 $method = $_SERVER['REQUEST_METHOD'];
 $action = $_GET['action'] ?? '';
+$input = $method === 'POST' ? readInput() : [];
+
+if ($method === 'POST' && in_array($action, ['add', 'update', 'delete', 'reorder'], true)) {
+    if (!verifyCsrfToken($input)) {
+        http_response_code(403);
+        echo json_encode(['error' => 'CSRF-Fehler']);
+        exit;
+    }
+}
 
 switch ($method . ':' . $action) {
 
@@ -55,9 +85,6 @@ switch ($method . ':' . $action) {
 
     // POST: Neues Institut hinzufügen
     case 'POST:add':
-        $input = json_decode(file_get_contents('php://input'), true);
-        if (!$input) { parse_str(file_get_contents('php://input'), $input); }
-
         $name = sanitize($input['name'] ?? '');
         if (empty($name)) {
             http_response_code(400);
@@ -88,7 +115,6 @@ switch ($method . ':' . $action) {
 
     // POST: Institut bearbeiten
     case 'POST:update':
-        $input = json_decode(file_get_contents('php://input'), true);
         $id = sanitize($input['id'] ?? '');
 
         $institutes = loadInstitutes($DATA_FILE);
@@ -117,7 +143,6 @@ switch ($method . ':' . $action) {
 
     // POST: Institut löschen
     case 'POST:delete':
-        $input = json_decode(file_get_contents('php://input'), true);
         $id = sanitize($input['id'] ?? '');
 
         $institutes = loadInstitutes($DATA_FILE);
@@ -136,7 +161,6 @@ switch ($method . ':' . $action) {
 
     // POST: Reihenfolge speichern
     case 'POST:reorder':
-        $input = json_decode(file_get_contents('php://input'), true);
         $order = $input['order'] ?? [];
 
         $institutes = loadInstitutes($DATA_FILE);

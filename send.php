@@ -53,14 +53,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'csrf') {
     exit;
 }
 
-// CSRF-Validierung (bei POST)
+// CSRF-Validierung (bei POST verpflichtend)
 $submittedToken = $_POST['csrf_token'] ?? '';
-if (!empty($submittedToken) && isset($_SESSION[CSRF_SESSION_KEY])) {
-    if (!hash_equals($_SESSION[CSRF_SESSION_KEY], $submittedToken)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($submittedToken) || empty($_SESSION[CSRF_SESSION_KEY]) || !hash_equals($_SESSION[CSRF_SESSION_KEY], $submittedToken)) {
         jsonResponse(false, 'Ungültige Sitzung. Bitte laden Sie die Seite neu.', 403);
     }
 }
-// Hinweis: CSRF wird toleriert wenn kein Token vorhanden (z.B. statischer Server)
 
 // Honeypot
 if (!empty($_POST['website'])) {
@@ -90,8 +89,7 @@ function checkRateLimit(string $ip): bool {
     return true;
 }
 
-$clientIp = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_X_REAL_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-$clientIp = trim(explode(',', $clientIp)[0]);
+$clientIp = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
 
 if (!checkRateLimit($clientIp)) {
     jsonResponse(false, 'Zu viele Anfragen. Bitte warten Sie einige Minuten.', 429);

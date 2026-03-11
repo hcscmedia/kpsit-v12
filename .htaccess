@@ -23,6 +23,9 @@ ServerSignature Off
 
     # data/-Verzeichnis komplett sperren
     RewriteRule ^data/ - [F,L]
+
+    # Debug-Skript nie öffentlich ausliefern
+    RewriteRule ^debug\.php$ - [F,L]
 </IfModule>
 
 # ============================================================

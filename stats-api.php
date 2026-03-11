@@ -10,7 +10,7 @@ declare(strict_types=1);
 // ── Konfiguration ──────────────────────────────────────────────
 define('STATS_FILE', __DIR__ . '/data/stats.json');
 define('STATS_MAX_DAYS', 90);   // Daten älter als 90 Tage werden gelöscht
-define('STATS_SALT', 'kps2024_salt_change_me'); // Für anonymen Besucher-Hash
+define('STATS_SALT', getenv('KPS_STATS_SALT') ?: 'change-me-in-env'); // Für anonymen Besucher-Hash
 
 // ── CORS & Header ──────────────────────────────────────────────
 header('Content-Type: application/json; charset=utf-8');
@@ -111,8 +111,10 @@ if ($action === 'track') {
 // ── STATISTIKEN AUSGEBEN (nur für Admin-Session) ───────────────
 if ($action === 'get') {
     // Einfacher Session-Schutz: nur wenn Admin eingeloggt
-    session_start();
-    if (empty($_SESSION['kps_admin'])) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (empty($_SESSION['admin_logged_in'])) {
         http_response_code(403);
         echo json_encode(['success' => false, 'message' => 'Nicht autorisiert']);
         exit;

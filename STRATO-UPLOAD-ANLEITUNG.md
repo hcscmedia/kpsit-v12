@@ -105,6 +105,14 @@ Das PHP-Backend benötigt einen beschreibbaren Ordner zum Speichern von Daten:
 | `https://www.kps-it.de/einsatznachweis.html` | Einsatznachweis-Formular |
 | `http://kps-it.de` | Weiterleitung auf https://www. |
 
+Wenn Sie SSH-Zugriff auf das Hosting haben, führen Sie zusätzlich den Runtime-Check aus:
+
+```bash
+php runtime-check.php
+```
+
+So sehen Sie sofort, ob `KPS_USE_DB`/DB-Zugang und `data/` korrekt konfiguriert sind.
+
 ---
 
 ## Schritt 9 – Pflichtangaben anpassen
@@ -126,10 +134,32 @@ info@kps-it.de      → Ihre echte E-Mail-Adresse
 [PLZ] [Ort]                 → Pflichtangabe
 ```
 
-### `admin.php` (Zeile 4)
-```php
-define('ADMIN_PASSWORD', 'KPS2024!');
-// Ersetzen durch ein sicheres Passwort, z.B.: 'Mein$icheres#Passwort2024'
+### `admin-auth.php`
+Admin-Login nutzt Passwort-Hash. Erzeuge lokal einen neuen Hash:
+
+```bash
+php -r "echo password_hash('DEIN_NEUES_PASSWORT', PASSWORD_BCRYPT, ['cost'=>12]);"
+```
+
+Trage den Hash danach in `admin-auth.php` bei `ADMIN_PASSWORD_HASH` ein.
+
+### ENV-Konfiguration fuer PHP (wichtig)
+Die App liest DB- und Sicherheitswerte aus Umgebungsvariablen.
+Nimm `.env.example` als Vorlage und setze die Werte auf Strato in `.htaccess` per `SetEnv`:
+
+```apache
+SetEnv KPS_USE_DB true
+SetEnv KPS_DB_HOST localhost
+SetEnv KPS_DB_NAME kpsit_db
+SetEnv KPS_DB_USER kpsit_user
+SetEnv KPS_DB_PASS DEIN_SICHERES_PASSWORT
+SetEnv KPS_STATS_SALT EIN-LANGER-ZUFAELLIGER-WERT
+```
+
+Wenn du ohne MySQL arbeiten willst, setze:
+
+```apache
+SetEnv KPS_USE_DB false
 ```
 
 ---

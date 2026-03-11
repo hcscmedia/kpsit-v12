@@ -33,32 +33,48 @@ Oder führe die SQL-Datei direkt in phpMyAdmin aus.
 
 ---
 
-## Schritt 3: db.php konfigurieren
+## Schritt 3: Umgebungsvariablen setzen (empfohlen)
 
-Öffne `db.php` und trage deine Zugangsdaten ein:
+Die Zugangsdaten stehen nicht mehr im Code, sondern werden aus Umgebungsvariablen gelesen:
 
-```php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'kpsit_db');
-define('DB_USER', 'kpsit_user');
-define('DB_PASS', 'DEIN_SICHERES_PASSWORT');
+Als Vorlage kannst du `.env.example` verwenden.
+
+```bash
+export KPS_DB_HOST="localhost"
+export KPS_DB_NAME="kpsit_db"
+export KPS_DB_USER="kpsit_user"
+export KPS_DB_PASS="DEIN_SICHERES_PASSWORT"
+```
+
+Optional für die Statistik-Hashung:
+
+```bash
+export KPS_STATS_SALT="EIN-LANGER-ZUFAELLIGER-WERT"
+```
+
+Hinweis fuer Shared Hosting ohne Shell-Umgebung:
+Statt `export` die Werte in `.htaccess` per `SetEnv` setzen.
+
+```apache
+SetEnv KPS_USE_DB true
+SetEnv KPS_DB_HOST localhost
+SetEnv KPS_DB_NAME kpsit_db
+SetEnv KPS_DB_USER kpsit_user
+SetEnv KPS_DB_PASS DEIN_SICHERES_PASSWORT
+SetEnv KPS_STATS_SALT EIN-LANGER-ZUFAELLIGER-WERT
 ```
 
 ---
 
 ## Schritt 4: MySQL aktivieren
 
-In `db.php` ändere:
+Aktiviere Datenbankmodus über Umgebungsvariable:
 
-```php
-define('USE_DB', true);
+```bash
+export KPS_USE_DB="true"
 ```
 
-Oder setze es in jeder API-Datei (`send.php`, `tracking-api.php`, `nachweis-api.php`):
-
-```php
-define('USE_DB', true);
-```
+Ohne diese Variable bleibt automatisch der JSON-Fallback aktiv.
 
 ---
 
@@ -71,6 +87,24 @@ mkdir -p /var/www/html/kps-berlin/data
 chmod 755 /var/www/html/kps-berlin/data
 chown www-data:www-data /var/www/html/kps-berlin/data
 ```
+
+---
+
+## Schritt 6: Runtime-Check ausführen (CLI)
+
+Mit dem Script `runtime-check.php` kannst du nach dem Deployment prüfen,
+ob ENV-Variablen, `USE_DB`, `data/` und die DB-Verbindung korrekt sind.
+
+```bash
+php runtime-check.php
+echo $?
+```
+
+Exit-Codes:
+
+- `0` = OK (oder DB-Check bewusst übersprungen bei JSON-Fallback)
+- `2` = DB-Verbindung fehlgeschlagen
+- `3` = DB verbunden, aber Test-Query fehlgeschlagen
 
 ---
 
@@ -91,16 +125,15 @@ Die Website funktioniert **auch ohne MySQL** mit JSON-Datei-Speicherung im `data
 
 ## Admin-Zugangsdaten
 
-Standard-Login für `admin.php`:
+Der Admin-Login nutzt Passwort-Hash in `admin-auth.php` (Konstante `ADMIN_PASSWORD_HASH`).
 
-- **Benutzername:** `admin`
-- **Passwort:** `kps2026!`
+Hash einmalig erzeugen:
 
-**Wichtig:** Passwort in `admin.php` Zeile ~15 ändern:
-
-```php
-define('ADMIN_PASS', password_hash('DEIN_NEUES_PASSWORT', PASSWORD_DEFAULT));
+```bash
+php -r "echo password_hash('DEIN_NEUES_PASSWORT', PASSWORD_BCRYPT, ['cost'=>12]);"
 ```
+
+Danach den ausgegebenen Hash in `admin-auth.php` bei `ADMIN_PASSWORD_HASH` eintragen.
 
 ---
 

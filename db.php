@@ -4,14 +4,14 @@
  * Konfiguration: Bitte DB_HOST, DB_NAME, DB_USER, DB_PASS anpassen!
  */
 
-define('DB_HOST', 'database-5019972253.webspace-host.com');
-define('DB_NAME', 'dbs15415310');
-define('DB_USER', 'dbu2897957');
-define('DB_PASS', 'Chk#231088bln');
+define('DB_HOST', getenv('KPS_DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('KPS_DB_NAME') ?: 'kpsit_db');
+define('DB_USER', getenv('KPS_DB_USER') ?: 'kpsit_user');
+define('DB_PASS', getenv('KPS_DB_PASS') ?: '');
 define('DB_CHARSET', 'utf8mb4');
 
 // Fallback: JSON-Dateien (wenn kein MySQL verfügbar)
-if (!defined('USE_DB')) define('USE_DB', true);  // auf false setzen für JSON-Fallback
+if (!defined('USE_DB')) define('USE_DB', filter_var(getenv('KPS_USE_DB') ?: 'false', FILTER_VALIDATE_BOOLEAN));
 if (!defined('DATA_DIR')) define('DATA_DIR', __DIR__ . '/data/');
 
 function getDB(): ?PDO {

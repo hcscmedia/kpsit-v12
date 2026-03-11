@@ -25,6 +25,22 @@ if (isset($_GET['logout'])) {
 // Alle anderen Seiten schützen
 kps_require_auth();
 
+$adminCsrfToken = kps_admin_csrf_token();
+
+function requireAdminCsrfFromPost(): void {
+  if (!kps_verify_admin_csrf($_POST['csrf_token'] ?? '')) {
+    http_response_code(403);
+    exit('CSRF-Fehler');
+  }
+}
+
+function requireAdminCsrfFromGet(): void {
+  if (!kps_verify_admin_csrf($_GET['csrf_token'] ?? '')) {
+    http_response_code(403);
+    exit('CSRF-Fehler');
+  }
+}
+
 define('DATA_DIR', __DIR__ . '/data/');
 // db.php definiert USE_DB und DATA_DIR selbst per if(!defined(...))
 // Hier NICHT nochmal definieren – db.php als einzige Quelle
@@ -64,22 +80,26 @@ function loadStats(): array {
 
 if (true) {
     if (isset($_GET['delete_msg'])) {
+    requireAdminCsrfFromGet();
         $msgs = loadMessages();
         $msgs = array_values(array_filter($msgs, fn($m) => $m['id'] !== $_GET['delete_msg']));
         saveMessages($msgs);
         header('Location: admin.php?section=messages&deleted=1'); exit;
     }
     if (isset($_GET['read_msg'])) {
+    requireAdminCsrfFromGet();
         $msgs = loadMessages();
         foreach ($msgs as &$m) { if ($m['id'] === $_GET['read_msg']) $m['read'] = true; }
         saveMessages($msgs);
         header('Location: admin.php?section=messages&id=' . urlencode($_GET['read_msg'])); exit;
     }
     if (isset($_POST['delete_all_messages'])) {
+    requireAdminCsrfFromPost();
         saveMessages([]);
         header('Location: admin.php?section=messages&deleted=all'); exit;
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_order'])) {
+    requireAdminCsrfFromPost();
         $orders = loadOrders();
         if ($_POST['action_order'] === 'create') {
             // Eigene ID oder auto-generiert
@@ -122,6 +142,7 @@ if (true) {
     }
     // Buchungsanfrage löschen
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_booking']) && $_POST['action_booking'] === 'delete') {
+      requireAdminCsrfFromPost();
         $bookings = loadBookings();
         $bid = $_POST['booking_id'] ?? '';
         $bookings = array_values(array_filter($bookings, function($b) use ($bid) {
@@ -138,6 +159,7 @@ if (true) {
     }
     // Nachweis löschen (Admin)
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_nachweis']) && $_POST['action_nachweis'] === 'delete') {
+      requireAdminCsrfFromPost();
         $nid = trim($_POST['nachweis_id'] ?? '');
         $nf  = DATA_DIR . 'nachweise.json';
         $nachweise = [];
@@ -148,6 +170,7 @@ if (true) {
         header('Location: admin.php?section=nachweise&deleted=1'); exit;
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_availability'])) {
+      requireAdminCsrfFromPost();
         $av = loadAvailability();
         $date = $_POST['av_date'] ?? '';
         $status = $_POST['av_status'] ?? 'available';
@@ -432,13 +455,13 @@ if ($section === 'messages' && isset($_GET['id'])) {
         <div class="msg-body"><?=htmlspecialchars($selectedMsg['message']??'')?></div>
         <div style="margin-top:1.25rem;display:flex;gap:.6rem;flex-wrap:wrap;">
           <a href="mailto:<?=htmlspecialchars($selectedMsg['email']??'')?>" class="btn-sm primary">Antworten</a>
-          <a href="admin.php?delete_msg=<?=urlencode($selectedMsg['id']??'')?>" class="btn-sm danger" onclick="return confirm('Löschen?')">Löschen</a>
+          <a href="admin.php?delete_msg=<?=urlencode($selectedMsg['id']??'')?>&csrf_token=<?=urlencode($adminCsrfToken)?>" class="btn-sm danger" onclick="return confirm('Löschen?')">Löschen</a>
         </div>
       </div>
       <?php else:?>
       <?php if(empty($msgs)):?><div class="card"><div class="card-body"><div class="empty-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><p>Noch keine Nachrichten.</p></div></div></div>
       <?php else:?><div class="card"><div class="card-head"><span class="card-head-title">Nachrichten</span><span class="card-head-sub"><?=count($msgs)?> gesamt · <?=$unread?> ungelesen</span></div><table class="tbl"><thead><tr><th>Von</th><th>E-Mail</th><th>Nachricht</th><th>Datum</th><th>Status</th><th>Aktionen</th></tr></thead><tbody>
-      <?php foreach(array_reverse($msgs) as $m):$r=$m['read']??false;?><tr><td style="font-weight:<?=$r?'400':'600'?>"><?=htmlspecialchars($m['name']??'')?></td><td><?=htmlspecialchars($m['email']??'')?></td><td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?=htmlspecialchars(substr($m['message']??'',0,50))?>…</td><td><?=date('d.m.Y',strtotime($m['created_at']??'now'))?></td><td><span class="badge <?=$r?'read':'unread'?>"><?=$r?'Gelesen':'Neu'?></span></td><td><a href="admin.php?section=messages&read_msg=<?=urlencode($m['id']??'')?>" class="btn-sm">Lesen</a> <a href="admin.php?delete_msg=<?=urlencode($m['id']??'')?>" class="btn-sm danger" onclick="return confirm('Löschen?')" style="margin-left:.3rem">Del</a></td></tr><?php endforeach;?></tbody></table></div><?php endif;endif;
+      <?php foreach(array_reverse($msgs) as $m):$r=$m['read']??false;?><tr><td style="font-weight:<?=$r?'400':'600'?>"><?=htmlspecialchars($m['name']??'')?></td><td><?=htmlspecialchars($m['email']??'')?></td><td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?=htmlspecialchars(substr($m['message']??'',0,50))?>…</td><td><?=date('d.m.Y',strtotime($m['created_at']??'now'))?></td><td><span class="badge <?=$r?'read':'unread'?>"><?=$r?'Gelesen':'Neu'?></span></td><td><a href="admin.php?section=messages&read_msg=<?=urlencode($m['id']??'')?>&csrf_token=<?=urlencode($adminCsrfToken)?>" class="btn-sm">Lesen</a> <a href="admin.php?delete_msg=<?=urlencode($m['id']??'')?>&csrf_token=<?=urlencode($adminCsrfToken)?>" class="btn-sm danger" onclick="return confirm('Löschen?')" style="margin-left:.3rem">Del</a></td></tr><?php endforeach;?></tbody></table></div><?php endif;endif;
       // CALENDAR
       elseif($section==='calendar'):
       $month=(int)($_GET['month']??date('n'));$year=(int)($_GET['year']??date('Y'));
@@ -734,6 +757,7 @@ if ($section === 'messages' && isset($_GET['id'])) {
 <script>
 let allInstitutes=[];
 let deleteTargetId=null;
+const adminCsrfToken = <?=json_encode($adminCsrfToken, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT)?>;
 
 // 1. Institute vom Server laden
 async function loadInstitutes(){
@@ -822,6 +846,7 @@ async function saveInstitute(e){
   if(!name){showAdminToast('Name ist erforderlich','error');btn.disabled=false;btn.textContent='Speichern';return;}
   
   const payload={
+    csrf_token: adminCsrfToken,
     id: id,
     name: name,
     short: document.getElementById('inst-short').value.trim(),
@@ -842,7 +867,7 @@ async function saveInstitute(e){
     const action = id ? 'update' : 'add';
     const res = await fetch('institutes-api.php?action=' + action, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', 'X-CSRF-Token': adminCsrfToken},
       body: JSON.stringify(payload)
     });
     const result = await res.json();
@@ -872,8 +897,8 @@ async function confirmDeleteInstitute(){
   try {
     const res = await fetch('institutes-api.php?action=delete', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({id: deleteTargetId})
+      headers: {'Content-Type': 'application/json', 'X-CSRF-Token': adminCsrfToken},
+      body: JSON.stringify({id: deleteTargetId, csrf_token: adminCsrfToken})
     });
     const result = await res.json();
     if(result.success) {
@@ -926,6 +951,19 @@ loadInstitutes();
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
 function setAvDate(d){var el=document.getElementById('av-date-input');if(el)el.value=d;}
+
+// Erzwingt CSRF-Token auf allen POST-Formularen im Admin.
+(function(){
+  var csrfToken = <?=json_encode($adminCsrfToken, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT)?>;
+  document.querySelectorAll('form[method="POST"], form[method="post"]').forEach(function(form){
+    if (form.querySelector('input[name="csrf_token"]')) return;
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'csrf_token';
+    input.value = csrfToken;
+    form.appendChild(input);
+  });
+})();
 </script>
 </body>
 </html>

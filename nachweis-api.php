@@ -60,6 +60,9 @@ if ($action === 'save' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // ── Alle Nachweise laden ───────────────────────────────────────────────────
 if ($action === 'list') {
+    if (empty($_SESSION['admin_logged_in'])) {
+        jsonOut(['success' => false, 'message' => 'Nicht autorisiert.'], 401);
+    }
     $nachweise = dbLoadNachweise();
     jsonOut(['success' => true, 'nachweise' => $nachweise]);
 }

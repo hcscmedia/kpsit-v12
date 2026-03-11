@@ -80,3 +80,39 @@ define('SENDER_FROM',     'noreply@kps-it.de'); // → Ihre Domain
 | Input-Sanitize | Alle Eingaben werden bereinigt und validiert              |
 | Spam-Filter    | Erkennt URLs und typische Spam-Muster in Nachrichten      |
 | Whitelist      | Nur erlaubte Betreff-Optionen werden akzeptiert           |
+
+## Go-Live in 60 Sekunden
+
+1. Admin-Hash setzen (`admin-auth.php`):
+```bash
+php -r "echo password_hash('DEIN_NEUES_PASSWORT', PASSWORD_BCRYPT, ['cost'=>12]);"
+```
+Hash in `ADMIN_PASSWORD_HASH` eintragen.
+
+2. ENV-Werte setzen (Shared Hosting via `.htaccess`):
+```apache
+SetEnv KPS_USE_DB true
+SetEnv KPS_DB_HOST localhost
+SetEnv KPS_DB_NAME kpsit_db
+SetEnv KPS_DB_USER kpsit_user
+SetEnv KPS_DB_PASS DEIN_SICHERES_PASSWORT
+SetEnv KPS_STATS_SALT EIN-LANGER-ZUFAELLIGER-WERT
+```
+
+3. Runtime prüfen (CLI):
+```bash
+php runtime-check.php
+```
+
+4. Schützenswertes prüfen:
+- `debug.php` darf nicht öffentlich erreichbar sein
+- `data/` muss schreibbar sein und per `.htaccess` gesperrt bleiben
+
+5. Kurztests nach Upload:
+- `https://www.kps-it.de`
+- `https://www.kps-it.de/admin.php`
+- `https://www.kps-it.de/kalender.html`
+
+Ausführliche Anleitung:
+- `SETUP-MYSQL.md`
+- `STRATO-UPLOAD-ANLEITUNG.md`
